@@ -14,7 +14,9 @@ public class WindowFrame extends JFrame{
 	 * Temporary frame size
 	 */
 	public static final int SIZE = 960;
+	
 	public WindowFrame() {
+		
 		//Frame properties.
 		setTitle("Dynamic Wallpaper");
 		setSize(SIZE, SIZE);
