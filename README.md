@@ -14,7 +14,7 @@
 - This program is my out-of-class personal project, feel free to take a look over the code. I hope it can be helpful for you!
 - The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
 
-## What I have struggle and learned about via this project
+## What I have struggle and learned about in this project
 Major. These are new to me, so it's really nice to learn about them.
 - The way to package .jar and runnable .jar, and how it performs based on my code (E.g: images must be inside a package to be exported to runnable jar, etc).
 - How to convert .jar to .exe using Launch4j by Grzegorz Kowal.
