@@ -1,5 +1,5 @@
 # Dynamic Wallpaper
-- A small program, written in Java, that allows users to change desktop wallpaper at specific time in the day.
+- A small program, written in Java, allows users to automatically change their desktop wallpaper at specific time in the day.
 - Users will first choose their picture folder, then the program will **randomly** choose one image and set it as wallpaper.
 - Initially, I'm learning on how Java interacts and modifies the OS, and coincidentally, my sister asked whether I know any kind of program that randomly changes wallpaper. Well, I don't know, so I decided to create one myself and here it is.
 
