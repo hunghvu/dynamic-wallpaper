@@ -1,10 +1,14 @@
 # Dynamic Wallpaper
-- A small program, written in Java, allows users to automatically change their desktop wallpaper at specific time in the day.
+- A small program, written in Java, allows users to automatically change their desktop wallpaper at a specific time in the day.
 - Users will first choose their picture folder, then the program will **randomly** choose one image and set it as wallpaper.
 - Initially, I'm learning on how Java interacts and modifies the OS, and coincidentally, my sister asked whether I know any kind of program that randomly changes wallpaper. Well, I don't know, so I decided to create one myself and here it is.
 
 ## Latest version
-**1.0.0.0 (06/16/2020)**
+### [1.0.0.2] - 06-17-2020 
+- Contains only an executable (.exe) file.
+- Compared to **v1.0.0.1**, there is no change in the source code.
+### [1.0.0.1] - 06-17-2020 
+- Packaged version, JDK 14.0.1 is included to improve portability.
 
 ## The GUI
 <!---
@@ -16,7 +20,9 @@
 ## Note
 - This program has been tested only on Window 10.
 - This program is my out-of-class personal project, feel free to take a look over the code. I hope it can be helpful for you!
+- I draw the icon for this program myself using Microsoft Paint. Just a simple icon contains the letters "D" and "W"! Then, I convert it to .ico file using [ICO CONVERTER](https://www.icoconverter.com/).
 - The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
+- The project uses and redistributes latest [JDK](https://www.oracle.com/java/technologies/javase-downloads.html) version, 14.0.1, as of 2020/06/17. I don't own nor be a contributor to the JDK. All rights reserved to its respective owners/contributors/creators.
 
 ## What I have struggle and learned about in this project
 Major. These are new to me, so it's really nice to learn about them.
