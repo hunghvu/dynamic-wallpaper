@@ -1,4 +1,13 @@
 # Internal development log
+### [1.0.0.2] - 06-17-2020 
+- Contains only an executable (.exe) file.
+- Compared to **v1.0.0.1**, there is no change in the source code.
+- Change JDK link to default folder: C:\Program Files\Java
+
+### [1.0.0.1] - 06-17-2020 
+- Packaged version, JDK 14.0.1 is included to improve portability.
+- Change JDK link to relative path.
+
 ## [1.0.0.0] - 2020-06-16
 - The first (final) release. 
 
