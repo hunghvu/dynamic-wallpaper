@@ -7,7 +7,11 @@
 **1.0.0.0 (06/16/2020)**
 
 ## The GUI
-![](https://github.com/hunghvu/dynamic-wallpaper/blob/master/dynamic-wallpaper/ImageForREADME/Guide.png)
+<!---
+![](https://github.com/hunghvu/dynamic-wallpaper/blob/master/dynamic-wallpaper/ImageForREADME/Guide.png) 
+//This is also a way to display image in markdown, but the img will not be displayed properly in published GitHub site
+-->
+<img src="https://github.com/hunghvu/dynamic-wallpaper/blob/master/dynamic-wallpaper/ImageForREADME/Guide.png" alt="https://github.com/hunghvu/dynamic-wallpaper/blob/master/dynamic-wallpaper/ImageForREADME/Guide.png">
 
 ## Note
 - This program has been tested only on Window 10.
