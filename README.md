@@ -1,4 +1,4 @@
-<meta name="google-site-verification" content="wQsf71d5NqAbS-Vo3ZcvIztoWV6hfckq57dag76yQd0" />
+<head><meta name="google-site-verification" content="wQsf71d5NqAbS-Vo3ZcvIztoWV6hfckq57dag76yQd0" /></head>
 
 # Dynamic Wallpaper
 - A small program, written in Java, allows users to automatically change their desktop wallpaper at specific time in the day.
