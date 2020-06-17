@@ -12,7 +12,7 @@
 ## Note
 - This program has been tested only on Window 10.
 - This program is my out-of-class personal project, feel free to take a look over the code. I hope it can be helpful for you!
-- The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to it. All right reserved to their respective owners/contributors/creators.
+- The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
 
 ## What I have struggle and learned about via this project
 Major. These are new to me, so it's really nice to learn about them.
