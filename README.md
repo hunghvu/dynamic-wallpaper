@@ -1,5 +1,13 @@
-<head><meta name="google-site-verification" content="wQsf71d5NqAbS-Vo3ZcvIztoWV6hfckq57dag76yQd0" /></head>
+<html>
+  
+  <head>
+  
+  <meta name="google-site-verification" content="wQsf71d5NqAbS-Vo3ZcvIztoWV6hfckq57dag76yQd0" />
+  
+  </head>
 
+  <body>
+  
 # Dynamic Wallpaper
 - A small program, written in Java, allows users to automatically change their desktop wallpaper at specific time in the day.
 - Users will first choose their picture folder, then the program will **randomly** choose one image and set it as wallpaper.
@@ -39,3 +47,5 @@ Minor. I already learned these concepts before, and this project help me improve
 ## License
 This project is protected under MIT license. <br>
 Copyright (c) 2020 Hung Huu Vu
+  </body>
+</html>
