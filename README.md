@@ -4,11 +4,11 @@
 - Initially, I'm learning on how Java interacts and modifies the OS, and coincidentally, my sister asked whether I know any kind of program that randomly changes wallpaper. Well, I don't know, so I decided to create one myself and here it is.
 
 ## Latest version
+### [1.0.0.3] - 07-14-2020
+- Packaged version, Open JDK 14.0.2 is included to improve portabiltiy.
+- Compared to **v1.0.0.2**, there is no change in the source code.
 ### [1.0.0.2] - 06-17-2020 
 - Contains only an executable (.exe) file.
-- Compared to **v1.0.0.1**, there is no change in the source code.
-### [1.0.0.1] - 06-17-2020 
-- Packaged version, JDK 14.0.1 is included to improve portability.
 
 ## The GUI
 <!---
@@ -22,7 +22,7 @@
 - This program is my out-of-class personal project, feel free to take a look over the code. I hope it can be helpful for you!
 - I draw the icon for this program myself using Microsoft Paint. Just a simple icon contains the letters "D" and "W"! Then, I convert it to .ico file using [ICO CONVERTER](https://www.icoconverter.com/).
 - The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
-- The project uses and redistributes latest [JDK](https://www.oracle.com/java/technologies/javase-downloads.html) version, 14.0.1, as of 2020/06/17. I don't own nor be a contributor to the JDK. All rights reserved to its respective owners/contributors/creators.
+- The project uses and redistributes the latest [Open JDK](https://jdk.java.net/14/) version, 14.0.2, as of 2020/07/14. I don't own nor be a contributor to the Open JDK. All rights reserved to its respective owners/contributors/creators.
 
 ## What I have struggle and learned about in this project
 Major. These are new to me, so it's really nice to learn about them.
