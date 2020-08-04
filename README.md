@@ -41,5 +41,5 @@ Minor. I already learned these concepts before, and this project help me improve
 - Way to use checkstyle, PMD, surpress warning.
 
 ## License
-This project is protected under MIT license. <br>
+This project is protected under GPLv2 license. <br>
 Copyright (c) 2020 Hung Huu Vu
