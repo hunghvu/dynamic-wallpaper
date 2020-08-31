@@ -1,0 +1,13 @@
+# Eclipse files
+/**/.classpath
+/**/.project
+/**/.pmd
+/**/.checkstyle
+/**/.settings
+
+# Binary files
+/**/bin/
+
+# Exe files
+/**/ExeFinal/
+/**/ExeTest/
