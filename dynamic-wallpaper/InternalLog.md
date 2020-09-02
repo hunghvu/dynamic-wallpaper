@@ -1,20 +1,21 @@
 # Internal development log
-### [1.0.0.2] - 06-17-2020 
+### [1.0.0.2] - 06-17-2020
 - Contains only an executable (.exe) file.
 - Compared to **v1.0.0.1**, there is no change in the source code.
 - Change JDK link to default folder: C:\Program Files\Java
 
-### [1.0.0.1] - 06-17-2020 
+### [1.0.0.1] - 06-17-2020
 - Packaged version, JDK 14.0.1 is included to improve portability.
 - Change JDK link to relative path.
 
 ## [1.0.0.0] - 2020-06-16
-- The first (final) release. 
+- The first (final) release.
 
 ## 2020/09/02
 - Refactor methods in MainProgram, move all to WindowFrame.
 - Refactor redundant code in WindowFrame.
 - Fix JVM not fully terminated when the program is exited.
+- There is a bug which preview wallpaper isn't working when changing folder path.
 
 
 ## 2020/09/01
@@ -58,7 +59,7 @@ ___
 
 # 2020/06/11
 - Add condition checking to Apply button.
-- First attempt to use external [JNA](https://github.com/java-native-access/jna) library in order to change desktop wallpaper. 
+- First attempt to use external [JNA](https://github.com/java-native-access/jna) library in order to change desktop wallpaper.
 
 # 2020/06/07
 - First attempt to implement auto update for the program. (automatically choose wallpaper).

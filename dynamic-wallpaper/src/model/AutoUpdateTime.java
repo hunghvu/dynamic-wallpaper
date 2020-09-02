@@ -119,11 +119,11 @@ public class AutoUpdateTime {
   /**
    * Constructor.
    * 
-   * @param theFolderDir picture folder path
+   * @param theFileArray picture folder path
    */
-  public AutoUpdateTime(final File theFolderDir) {
+  public AutoUpdateTime(final FileArray theFileArray) {
 
-    myFileArray = new FileArray(theFolderDir);
+    myFileArray = theFileArray;
     autoUpdate(MY_RUN_SIGNAL);
 
   }

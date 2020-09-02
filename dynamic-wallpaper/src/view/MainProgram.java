@@ -1,24 +1,6 @@
 package view;
 
-import java.awt.AWTException;
-import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import controller.Controller;
 
 /**
  * The main class to run a program.
@@ -42,7 +24,8 @@ public class MainProgram {
     
     
     //Initialize frame for program.
-    final WindowFrame frame = new WindowFrame();
+//    final WindowFrame frame = new WindowFrame();
+    final Controller test = new Controller();
 
     
 

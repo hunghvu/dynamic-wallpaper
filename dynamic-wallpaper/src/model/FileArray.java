@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Arrays;
-import java.util.Observable;
+
 
 /**
  * This class return an array of file (path) in given directory.
@@ -21,7 +21,11 @@ public class FileArray {
   
   
   //add notifier (01/09)
+  /**
+   * Change notifier for FileArray.
+   */
   private PropertyChangeSupport myFileNotifier;
+  
 
   /**
    * Constructor.
@@ -42,9 +46,13 @@ public class FileArray {
   }
   
   //add listener(01/09)
-  public void addListener (PropertyChangeListener theObserver) {
+  /**
+   * Add listener for this object.
+   * @param theListener Observer object.
+   */
+  public void addListener (PropertyChangeListener theListener) {
 
-    myFileNotifier.addPropertyChangeListener(theObserver);
+    myFileNotifier.addPropertyChangeListener(theListener);
 
   }
 

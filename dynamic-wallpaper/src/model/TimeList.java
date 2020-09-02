@@ -1,9 +1,19 @@
 package model;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+/**
+ * The code that notify what the change action is.
+ * @author Hung Vu
+ *
+ */
+enum ChangeCode{
+  ADD, DELETE, CLEAR;
+}
 
 /**
  * This class construct list of time and manipulate it.
@@ -22,6 +32,9 @@ public class TimeList {
   private static List<String> myTimeList;
   
   //add notifier (02/09)
+  /**
+   * Change notifier for TimeList
+   */
   private PropertyChangeSupport myTimeNotifier;
 
   /**
@@ -55,11 +68,11 @@ public class TimeList {
       myTimeList.add(theTime);
       Collections.sort(myTimeList);
       
-      //Ignore old and new object (02/09)
+      //Ignore old object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           myTimeList,
-          true);
+          ChangeCode.ADD);
 
       return true;
 
@@ -81,11 +94,11 @@ public class TimeList {
     if (myTimeList.contains(theTime)) {
       
       myTimeList.remove(theTime);
-      //Ignore old and new object (02/09)
+      //Ignore old object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           myTimeList,
-          true);
+          ChangeCode.DELETE);
 
       return true;
 
@@ -104,11 +117,21 @@ public class TimeList {
     
     myTimeList.clear();
     
-    //Ignore old and new object (02/09)
+    //Ignore old object (02/09)
     myTimeNotifier.firePropertyChange(
         "myTimeList",
         myTimeList,
-        true);
+        ChangeCode.CLEAR);
+
+  }
+  
+  /**
+   * Add listener to this object.
+   * @param theListener A listener.
+   */
+  public void addListener (PropertyChangeListener theListener) {
+
+    myTimeNotifier.addPropertyChangeListener(theListener);
 
   }
 

@@ -117,6 +117,10 @@ public class WindowFrame extends JFrame {
 
   }
   
+  /**
+   * Check whether there is another instance of program running.
+   * @return true if there is another process running right now, false otherwise.
+   */
   private boolean isLocked() {
     
     //System tmp directory. We don't care where it is located.
@@ -168,6 +172,9 @@ public class WindowFrame extends JFrame {
     return false;
   }
   
+  /**
+   * Provide support for iconify-ing if System Tray is available.
+   */
   private void systemTray() {
     //Check if system support tray.
     if (SystemTray.isSupported()) {
