@@ -18,7 +18,9 @@ public class FileArray {
    * Array of file.
    */
   private static File[] myFileList;
-
+  
+  
+  //add notifier (01/09)
   private PropertyChangeSupport myFileNotifier;
 
   /**
@@ -30,7 +32,9 @@ public class FileArray {
     
     //Initialize notifier (01/09)
     myFileNotifier = new PropertyChangeSupport(this);
-    myFileNotifier.firePropertyChange("myFileList", FileArray.myFileList, theDir.listFiles());
+    myFileNotifier.firePropertyChange(
+        "myFileList", FileArray.myFileList, theDir.listFiles()
+        );
     
     myFileList = theDir.listFiles();
     

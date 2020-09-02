@@ -11,6 +11,15 @@
 ## [1.0.0.0] - 2020-06-16
 - The first (final) release. 
 
+## 2020/09/02
+- Refactor methods in MainProgram, move all to WindowFrame.
+- Refactor redundant code in WindowFrame.
+- Fix JVM not fully terminated when the program is exited.
+
+
+## 2020/09/01
+- Introduce controller, observer & observable pattern.
+___
 ## 2020/06/16
 - Minor changes to printed messages.
 - Change preview current image to next image.

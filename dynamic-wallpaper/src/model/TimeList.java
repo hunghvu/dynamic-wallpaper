@@ -20,15 +20,18 @@ public class TimeList {
   //This makes easier to change the underlying implementation.
   //E.g: ArrayList is List, but List is not ArrayList => need to change return type.
   private static List<String> myTimeList;
-
+  
+  //add notifier (02/09)
   private PropertyChangeSupport myTimeNotifier;
 
   /**
    * Constructor.
    */
   public TimeList() {
-
+    
+    //Initialize notifier(02/09)
     myTimeNotifier = new PropertyChangeSupport(this);
+    
     //Use diamond operator
     myTimeList = new ArrayList<>();
 
@@ -48,11 +51,16 @@ public class TimeList {
       return false;
 
     } else {
+      
+      myTimeList.add(theTime);
+      Collections.sort(myTimeList);
+      
+      //Ignore old and new object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           myTimeList,
-          myTimeList.add(theTime));
-      Collections.sort(myTimeList);
+          true);
+
       return true;
 
     }
@@ -71,8 +79,14 @@ public class TimeList {
 
     //Remove when the time is in the list.
     if (myTimeList.contains(theTime)) {
-
+      
       myTimeList.remove(theTime);
+      //Ignore old and new object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+          myTimeList,
+          true);
+
       return true;
 
     } else {
@@ -87,8 +101,14 @@ public class TimeList {
    * Clear data of time list.
    */
   public void clearTimeList() {
-
+    
     myTimeList.clear();
+    
+    //Ignore old and new object (02/09)
+    myTimeNotifier.firePropertyChange(
+        "myTimeList",
+        myTimeList,
+        true);
 
   }
 
