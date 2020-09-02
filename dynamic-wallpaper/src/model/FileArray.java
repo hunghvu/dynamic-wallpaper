@@ -1,11 +1,14 @@
 package model;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Arrays;
+import java.util.Observable;
 
 /**
  * This class return an array of file (path) in given directory.
- * 
+ *
  * @author Hung Vu
  *
  */
@@ -16,20 +19,34 @@ public class FileArray {
    */
   private static File[] myFileList;
 
+  private PropertyChangeSupport myFileNotifier;
+
   /**
    * Constructor.
-   * 
+   *
    * @param theDir given folder directory
    */
   public FileArray(final File theDir) {
-
+    
+    //Initialize notifier (01/09)
+    myFileNotifier = new PropertyChangeSupport(this);
+    myFileNotifier.firePropertyChange("myFileList", FileArray.myFileList, theDir.listFiles());
+    
     myFileList = theDir.listFiles();
+    
+
+  }
+  
+  //add listener(01/09)
+  public void addListener (PropertyChangeListener theObserver) {
+
+    myFileNotifier.addPropertyChangeListener(theObserver);
 
   }
 
   /**
    * Return array of file path.
-   * 
+   *
    * @return array of file path.
    */
   public File[] getFileArray() {
