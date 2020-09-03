@@ -17,7 +17,7 @@ import model.TimeList;
  * @author Hung Vu
  *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({"serial", "PMD.LawOfDemeter"})
 public class RightTextPanel extends JPanel implements ActionListener {
 
   /**
@@ -166,7 +166,7 @@ public class RightTextPanel extends JPanel implements ActionListener {
       // Clear time list (display message + data storage) when
       // button is pressed.
 
-      // Reset time list data.
+      // Reset time list data. (02/09)
       controller.Controller.resetTimeList();
 
       // Change requirement checklist.

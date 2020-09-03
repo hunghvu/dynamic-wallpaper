@@ -11,25 +11,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import model.TimeList;
 
 /**
  * This class creates a middle panel to preview image, receives users input to
  * create time list, and create proper message to display.
- * 
+ *
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.ModifiedCyclomaticComplexity", 
-    "PMD.StdCyclomaticComplexity", "PMD.LawOfDemeter", "PMD.CyclomaticComplexity",
-    "PMD.ExcessiveMethodLength", "PMD.AvoidDuplicateLiterals", "PMD.NullAssignment",
-    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly"})
+@SuppressWarnings({"serial", "PMD.LawOfDemeter", "PMD.NullAssignment",
+    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly",
+    "PMD.UnusedAssignment"})
 public class MiddleSettingPanel extends JPanel implements ActionListener {
 
-//  /**
-//   * Store list of given time.
-//   */
-//  private static final TimeList MY_TIME_LIST = new TimeList();
+  //Remove time list (02/09)
 
   /**
    * Save the time to change wallpaper.
@@ -60,11 +55,11 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    * Label to indicate purpose of middle region.
    */
   private static final JLabel MY_PREVIEW_LABEL = new JLabel(
-      
+
       "Next Wallpaper Preview", JLabel.CENTER
-      
+
       );
-  
+
   /**
    * Label to indicate status of the program.
    */
@@ -79,21 +74,11 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    * Width of previewed image.
    */
   private static final int MY_RESIZE_W = 770;
-  
+
   /**
    * Preview height.
    */
   private static final int MY_RESIZE_H = 435;
-  
-  /**
-   * Parameter to print message to text log.
-   */
-  private static final String MY_TEXT_LOG = "LOG";
-  
-  /**
-   * Parameter to print message to Time List.
-   */
-  private static final String MY_TEXT_TIME_LIST = "TIME_LIST";
 
   /**
    * Image for the preview panel. This will contain image after resized.
@@ -106,22 +91,12 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
   private static JLabel myImageLabel;
 
   /**
-   * Value of hour.
-   */
-  private static int myHourValue;
-
-  /**
-   * Value of minute.
-   */
-  private static int myMinuteValue;
-
-  /**
    * Constructor.
    */
   public MiddleSettingPanel() {
     // Call super.
     super();
-    
+
     // Properties of panel.
     setLayout(new BorderLayout());
 
@@ -155,7 +130,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   /**
    * This method provide the input in hour text field.
-   * 
+   *
    * @return hour in text field
    */
   public static String getMyHourText() {
@@ -166,7 +141,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   /**
    * This method provide the input in minute text field.
-   * 
+   *
    * @return minute in text field
    */
   public static String getMyMinuteText() {
@@ -175,15 +150,6 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   }
 
-//  /**
-//   * Reset time list.
-//   */
-//  public static void resetTimeList() {
-//
-//    MY_TIME_LIST.clearTimeList();
-//
-//  }
-  
   /**
    * Display the status of program.
    * @param theStatus Indicates whether the program is running. <br>
@@ -192,13 +158,13 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    */
   public static void setRunStatus(final boolean theStatus) {
     if (theStatus) {
-      
+
       MY_STATUS_LABEL.setText("Status: Running");
-      
+
     } else {
-      
+
       MY_STATUS_LABEL.setText("Status: Not Running");
-      
+
     }
   }
 
@@ -209,21 +175,21 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     // Remove old image to add the new one.
     MY_PREVIEW_PANEL.removeAll();
-    
+
     // Get original image icon.
     ImageIcon originalIcon = new ImageIcon(thePath.toString());
-    
+
     //Get original image.
     Image originalImage = originalIcon.getImage();
 
     //Image to resize
     Image resized = originalImage.getScaledInstance(
-        
+
         MY_RESIZE_W, //776 fit left margin 774 fit right margin
         MY_RESIZE_H,
         Image.SCALE_DEFAULT
-        
-        );    
+
+        );
 
     // Previewed image after resized.
     myWallpaperImage = new ImageIcon(resized);
@@ -233,11 +199,11 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     // Add label (image) to the panel.
     MY_PREVIEW_PANEL.add(myImageLabel);
-    
+
     //Destroy image in memory. To prevent memory leak from them.
     originalImage.flush();
     resized.flush();
-    
+
     //Set to null to persuade garbage collection.
     //Not reliable, only to limit the possibility of memory leak.
     originalIcon = null;
@@ -245,7 +211,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     resized = null;
     myWallpaperImage = null;
     myImageLabel = null;
-    
+
     //Collect heap garbage.
     System.gc();
 
@@ -264,18 +230,18 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
       // Reset input fields after button is pressed.
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
-      
-      
-      
+
+
+
       //////////////////////////////////
-      
-      
+
+
     } else if (theE.getSource() == MY_CLEAR_TIME) { // Clear input fields.
 
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
 
-    } else if (theE.getSource() == MY_DELETE_TIME) {      
+    } else if (theE.getSource() == MY_DELETE_TIME) {
       // Delete time (from string time list)
       // and update message.
       controller.Controller.deleteTime(getMyHourText(), getMyMinuteText());

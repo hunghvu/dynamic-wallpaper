@@ -10,8 +10,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
-import model.RandomInFolder;
-import model.FileArray;
 
 /**
  * This class creates south region panel, which includes Apply button and
@@ -20,9 +18,11 @@ import model.FileArray;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.RedundantFieldInitializer", "PMD.LawOfDemeter",
-    "PMD.ExcessiveMethodLength", "PMD.ModifiedCyclomaticComplexity",
-    "PMD.DoNotCallGarbageCollectionExplicitly", "PMD.NullAssignment"})
+@SuppressWarnings({ 
+      "serial", "PMD.LawOfDemeter", "PMD.ExcessiveMethodLength",
+      "PMD.ModifiedCyclomaticComplexity", "PMD.CyclomaticComplexity",
+      "PMD.NullAssignment" 
+      })
 public class SouthDirPanel extends JPanel implements ActionListener {
 
   /**
@@ -56,13 +56,9 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    */
   private static File myFolderDir;
 
-  //Remove FileArray (unused code - 09/02)
+  // Remove FileArray (unused code - 09/02)
 
-//  /**
-//   * Make program run automatically when Apply is pressed. <br>
-//   * This will be initialized after Apply is successfully pressed.
-//   */
-//  private static AutoUpdateTime myAutoRun;
+  // Remove AutoRum (09/02)
 
   /**
    * Timer to automatically update preview panel (refresh GUI). <br>
@@ -74,7 +70,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public SouthDirPanel() {
-    //Call super.
+    // Call super.
     super();
 
     // Panel properties.
@@ -104,7 +100,6 @@ public class SouthDirPanel extends JPanel implements ActionListener {
   public static File folderDirGetter() {
     return myFolderDir;
   }
-
 
   /**
    * Determine program behavior when a button is pressed.
@@ -164,11 +159,8 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
         }
 
-
         controller.Controller.createFileArray(myFolderDir);
         controller.Controller.startBackgroundChanger();
-
-
 
         // Timer for automatic repaint/revalidate.
         myUpdateTimer = new Timer(250, this); // Action listener (this)
@@ -177,13 +169,13 @@ public class SouthDirPanel extends JPanel implements ActionListener {
         // Print message after apply button is pressed.
         RightTextPanel.textSetter(MY_LOG_OPTION, "Apply completed.");
 
-        //Display running state.
+        // Display running state.
         MiddleSettingPanel.setRunStatus(true);
 
       }
 
     } else if (theE.getSource() == MY_STOP) {
-      //Stop the program.
+      // Stop the program.
 
       // When timer are null.
       if (myUpdateTimer == null || controller.Controller.getAuto() == null) {
@@ -198,8 +190,10 @@ public class SouthDirPanel extends JPanel implements ActionListener {
         controller.Controller.stopBackgroundChanger();
 
         // Display log.
-        RightTextPanel.textSetter(MY_LOG_OPTION, "Program has stopped. \n"
-            + "Please press Apply button to restart!");
+        RightTextPanel.textSetter(
+            MY_LOG_OPTION, 
+            "Program has stopped. \n" + "Please press Apply button to restart!"
+        );
 
         // Display running status.
         MiddleSettingPanel.setRunStatus(false);
