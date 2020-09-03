@@ -23,6 +23,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import main.MainProgram;
+
 /**
  * This class creates a window frame to contains panel. <br>
  * Basically, this is GUI of the program.

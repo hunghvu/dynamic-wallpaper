@@ -10,7 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
-import model.AutoUpdateTime;
+import model.RandomInFolder;
 import model.FileArray;
 
 /**
@@ -195,7 +195,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
         // Stop the threads.
         myUpdateTimer.stop();
-        controller.Controller.stopBackgroundTask();
+        controller.Controller.stopBackgroundChanger();
 
         // Display log.
         RightTextPanel.textSetter(MY_LOG_OPTION, "Program has stopped. \n"

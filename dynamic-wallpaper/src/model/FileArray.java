@@ -19,42 +19,19 @@ public class FileArray {
    */
   private static File[] myFileList;
   
-  
-  //add notifier (01/09)
-  /**
-   * Change notifier for FileArray.
-   */
-  private PropertyChangeSupport myFileNotifier;
-  
 
   /**
    * Constructor.
    *
    * @param theDir given folder directory
    */
-  public FileArray(final File theDir) {
-    
-    //Initialize notifier (01/09)
-    myFileNotifier = new PropertyChangeSupport(this);
-    myFileNotifier.firePropertyChange(
-        "myFileList", FileArray.myFileList, theDir.listFiles()
-        );
+  public FileArray(final File theDir) {  
     
     myFileList = theDir.listFiles();
     
 
   }
   
-  //add listener(01/09)
-  /**
-   * Add listener for this object.
-   * @param theListener Observer object.
-   */
-  public void addListener (PropertyChangeListener theListener) {
-
-    myFileNotifier.addPropertyChangeListener(theListener);
-
-  }
 
   /**
    * Return array of file path.

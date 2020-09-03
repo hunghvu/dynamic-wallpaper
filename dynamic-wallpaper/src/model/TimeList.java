@@ -6,14 +6,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * The code that notify what the change action is.
- * @author Hung Vu
- *
- */
-enum ChangeCode{
-  ADD, DELETE, CLEAR;
-}
+import view.NorthCheckListPanel;
+import view.RightTextPanel;
 
 /**
  * This class construct list of time and manipulate it.
@@ -56,25 +50,30 @@ public class TimeList {
    * @param theTime time given by a user.
    * @return true when add is success, false otherwise.
    */
-  public boolean addTime(final String theTime) {
-
+  private void addTime(final int theHour, final int theMinute) {
+    
+    String time = theHour + ":" + theMinute;
     //Ensure the time can appear only once.
-    if (myTimeList.contains(theTime)) {
-
-      return false;
+    if (myTimeList.contains(time)) {
+      
+      //Ignore old object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+         null,
+          ChangeCode.ADD_FAIL);
+      
 
     } else {
       
-      myTimeList.add(theTime);
+      myTimeList.add(time);
       Collections.sort(myTimeList);
       
       //Ignore old object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
-          myTimeList,
-          ChangeCode.ADD);
+          null,
+          ChangeCode.ADD_SUCCESS);
 
-      return true;
 
     }
 
@@ -88,7 +87,7 @@ public class TimeList {
    *         false is fail <br>
    *         true is success
    */
-  public boolean deleteTime(final String theTime) {
+  public void deleteTime(final String theTime) {
 
     //Remove when the time is in the list.
     if (myTimeList.contains(theTime)) {
@@ -97,14 +96,18 @@ public class TimeList {
       //Ignore old object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
-          myTimeList,
-          ChangeCode.DELETE);
+          null,
+          ChangeCode.DELETE_SUCCESS);
 
-      return true;
 
     } else {
+      
+      //Ignore old object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+          null,
+          ChangeCode.DELETE_FAIL);
 
-      return false;
 
     }
 
@@ -120,7 +123,7 @@ public class TimeList {
     //Ignore old object (02/09)
     myTimeNotifier.firePropertyChange(
         "myTimeList",
-        myTimeList,
+        null,
         ChangeCode.CLEAR);
 
   }
@@ -148,9 +151,81 @@ public class TimeList {
    * @return true means empty <br>
    *         false otherwise
    */
-  public boolean isEmpty() {
+  public void isEmpty() {
 
-    return myTimeList.isEmpty();
+    if(myTimeList.isEmpty()) {
+      //Ignore old object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+          null,
+          ChangeCode.EMPTY_TRUE);
+    } else {
+      //Ignore old object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+          null,
+          ChangeCode.EMPTY_FALSE);
+    }
+
+  }
+  
+  public void timeValidator(String theHour, String theMinute) {
+ // See if string is in ## format (length == 2).
+
+    if (theHour.length() == 2 && theMinute.length() == 2) {
+
+      try {
+
+        // Turn hour and minute from string to int. If fail then throws exception.
+        int myHourValue = Integer.parseInt(theHour);
+        int myMinuteValue = Integer.parseInt(theMinute);
+
+        // Hour (00-23), minute (00-59).
+        if (myHourValue >= 0 && myHourValue <= 23 && myMinuteValue >= 0 && myMinuteValue <= 59) {
+
+          addTime(myHourValue, myMinuteValue);
+          
+
+        } else { // Time is out of range.
+          System.out.println(1);
+          //Ignore old object (02/09)
+          myTimeNotifier.firePropertyChange(
+              "myTimeList",
+              null,
+              TimeErrorCode.OUT_OF_RANGE);
+
+
+        }
+
+
+      } catch (NumberFormatException e) {   
+        
+        //Ignore old object (02/09)
+        myTimeNotifier.firePropertyChange(
+            "myTimeList",
+            null,
+            TimeErrorCode.INVALID_CHAR);
+        
+        // Throw exception when string can't be parsed. 
+        // Invalid input format.
+        
+
+//
+
+      }
+
+    } else { // Invalid input format: length != 2.
+      
+      //Ignore old object (02/09)
+      myTimeNotifier.firePropertyChange(
+          "myTimeList",
+          null,
+          TimeErrorCode.INVALID_FORMAT);
+      
+
+
+    }
+
 
   }
 

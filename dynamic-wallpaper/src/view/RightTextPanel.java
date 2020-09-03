@@ -167,7 +167,7 @@ public class RightTextPanel extends JPanel implements ActionListener {
       // button is pressed.
 
       // Reset time list data.
-      MiddleSettingPanel.resetTimeList();
+      controller.Controller.resetTimeList();
 
       // Change requirement checklist.
       NorthCheckListPanel.requirementSetter(20);

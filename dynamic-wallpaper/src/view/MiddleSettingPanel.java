@@ -26,10 +26,10 @@ import model.TimeList;
     "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly"})
 public class MiddleSettingPanel extends JPanel implements ActionListener {
 
-  /**
-   * Store list of given time.
-   */
-  private static final TimeList MY_TIME_LIST = new TimeList();
+//  /**
+//   * Store list of given time.
+//   */
+//  private static final TimeList MY_TIME_LIST = new TimeList();
 
   /**
    * Save the time to change wallpaper.
@@ -175,14 +175,14 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   }
 
-  /**
-   * Reset time list.
-   */
-  public static void resetTimeList() {
-
-    MY_TIME_LIST.clearTimeList();
-
-  }
+//  /**
+//   * Reset time list.
+//   */
+//  public static void resetTimeList() {
+//
+//    MY_TIME_LIST.clearTimeList();
+//
+//  }
   
   /**
    * Display the status of program.
@@ -259,71 +259,17 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     if (theE.getSource() == MY_SAVE_TIME) {
 
-      // See if string is in ## format (length == 2).
-      if (getMyHourText().length() == 2 && getMyMinuteText().length() == 2) {
-
-        try {
-
-          // Turn hour and minute from string to int. If fail then throws exception.
-          myHourValue = Integer.parseInt(getMyHourText());
-          myMinuteValue = Integer.parseInt(getMyMinuteText());
-
-          // Hour (00-23), minute (00-59).
-          if (myHourValue >= 0 && myHourValue <= 23 && myMinuteValue >= 0 && myMinuteValue <= 59) {
-
-            // Build list of time.
-            final boolean addResult = MY_TIME_LIST.addTime(
-                
-                getMyHourText() + ":" + getMyMinuteText()
-                
-                );
-
-            // Display message.
-            if (addResult) { // Add to time list: Success - true.
-
-              RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Time list is succesfully updated.");
-
-              // Update requirement status.
-              NorthCheckListPanel.requirementSetter(21);
-
-            } else { // Add to time list: Fail.
-
-              RightTextPanel.textSetter(
-                  
-                  MY_TEXT_TIME_LIST, 
-                  "Cannot add duplicate time! \n"
-                  + "Please try again.");
-
-            }
-
-          } else { // Time is out of range.
-
-            RightTextPanel.textSetter(MY_TEXT_LOG, "Time is out of range! \n"
-                + "Please try again.");
-
-          }
-
-        } catch (NumberFormatException e) {          
-          // Throw exception when string can't be parsed. 
-          // Invalid input format.
-          
-          RightTextPanel.textSetter(MY_TEXT_LOG, "Invalid character! \n"
-              + "Please try again.");
-
-        }
-
-      } else { // Invalid input format: length != 2.
-
-        RightTextPanel.textSetter(MY_TEXT_LOG, "Input should contains only \n"
-            + "2 characters per field! \n"
-            + "Please try again.");
-
-      }
+      controller.Controller.setTime(getMyHourText(), getMyMinuteText());
 
       // Reset input fields after button is pressed.
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
-
+      
+      
+      
+      //////////////////////////////////
+      
+      
     } else if (theE.getSource() == MY_CLEAR_TIME) { // Clear input fields.
 
       MY_HOUR.setText("");
@@ -332,25 +278,9 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     } else if (theE.getSource() == MY_DELETE_TIME) {      
       // Delete time (from string time list)
       // and update message.
-      
-      if (MY_TIME_LIST.deleteTime(getMyHourText() + ":" + getMyMinuteText())) {        
-        // Delete: success - true.
-        
-        RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Delete time successfully.");
+      controller.Controller.deleteTime(getMyHourText(), getMyMinuteText());
+      controller.Controller.emptyTime();
 
-      } else {       
-        // Delete: Fail.
-        
-        RightTextPanel.textSetter(MY_TEXT_LOG, "Provided time is not in the list.");
-
-      }
-
-      // Check if list is empty to update requirement checker (north panel).
-      if (MY_TIME_LIST.isEmpty()) {
-
-        NorthCheckListPanel.requirementSetter(20);
-
-      }
 
       // Reset text field after button is pressed
       MY_HOUR.setText("");

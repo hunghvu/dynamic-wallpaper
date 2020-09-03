@@ -19,7 +19,7 @@ import view.RightTextPanel;
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.LawOfDemeter",
     "PMD.AssignmentToNonFinalStatic", "PMD.CommentSize", "PMD.DataflowAnomalyAnalysis",
     "PMD.DoNotCallGarbageCollectionExplicitly", "PMD.NullAssignment"})
-public class AutoUpdateTime {
+public class RandomInFolder {
 
   /**
    * Change wallpaper flag.
@@ -121,7 +121,7 @@ public class AutoUpdateTime {
    * 
    * @param theFileArray picture folder path
    */
-  public AutoUpdateTime(final FileArray theFileArray) {
+  public RandomInFolder(final FileArray theFileArray) {
 
     myFileArray = theFileArray;
     autoUpdate(MY_RUN_SIGNAL);
