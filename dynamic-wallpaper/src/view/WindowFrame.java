@@ -107,6 +107,10 @@ public class WindowFrame extends JFrame {
         public void windowIconified(final WindowEvent theE) {
 
           setVisible(false);
+          
+          // Show message to let user know the program is minimized to system tray.
+          final JFrame msgFrame = new JFrame();
+          JOptionPane.showMessageDialog(msgFrame, "The program is now minimized to system tray.");
 
         }
 

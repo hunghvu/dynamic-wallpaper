@@ -10,6 +10,12 @@
 
 ## [1.0.0.0] - 2020-06-16
 - The first (final) release.
+___
+
+## 2020/09/03
+- Display message panel when a user minimize the program.
+- Fix time list not display minute properly (E.g: 17:2 to -> 17:02).
+- Add button to get picture from Internet. Preliminary setup for this new feature.
 
 ## 2020/09/02
 - Refactor methods in MainProgram, move all to WindowFrame.
@@ -21,6 +27,7 @@
 ## 2020/09/01
 - Introduce controller, observer & observable pattern.
 ___
+
 ## 2020/06/16
 - Minor changes to printed messages.
 - Change preview current image to next image.

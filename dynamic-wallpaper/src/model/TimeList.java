@@ -50,7 +50,7 @@ public class TimeList {
    * @param theTime time given by a user.
    * @return true when add is success, false otherwise.
    */
-  private void addTime(final int theHour, final int theMinute) {
+  private void addTime(final String theHour, final String theMinute) {
     
     String time = theHour + ":" + theMinute;
     //Ensure the time can appear only once.
@@ -183,11 +183,11 @@ public class TimeList {
         // Hour (00-23), minute (00-59).
         if (myHourValue >= 0 && myHourValue <= 23 && myMinuteValue >= 0 && myMinuteValue <= 59) {
 
-          addTime(myHourValue, myMinuteValue);
+          addTime(theHour, theMinute);
           
 
         } else { // Time is out of range.
-          System.out.println(1);
+
           //Ignore old object (02/09)
           myTimeNotifier.firePropertyChange(
               "myTimeList",

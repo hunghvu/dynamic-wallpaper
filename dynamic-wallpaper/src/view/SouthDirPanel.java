@@ -100,7 +100,23 @@ public class SouthDirPanel extends JPanel implements ActionListener {
   public static File folderDirGetter() {
     return myFolderDir;
   }
-
+  
+  /**
+   * Return the browse button for necessary manipulation.
+   * @return the browse button
+   */
+  public static JButton getBrowseButton() {
+    return MY_DIR_BROWSE;
+  }
+  
+  /**
+   * Return the text are for necessary manipulation.
+   * @return the text area
+   */
+  public static JTextArea getTextArea() {
+    return MY_TEXT;
+  }
+  
   /**
    * Determine program behavior when a button is pressed.
    */

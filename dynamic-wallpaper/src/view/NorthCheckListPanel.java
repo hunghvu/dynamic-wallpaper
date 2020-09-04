@@ -1,6 +1,10 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -27,7 +31,7 @@ public class NorthCheckListPanel extends JPanel {
   /**
    * First step in using a program.
    */
-  private static final JLabel MY_REQUIREMENT_1 = new JLabel(
+  private static final JLabel MY_REQ_1 = new JLabel(
       
       "1) Choose folder directory. Not completed."
       
@@ -36,9 +40,17 @@ public class NorthCheckListPanel extends JPanel {
   /**
    * Second step in using a program.
    */
-  private static final JLabel MY_REQUIREMENT_2 = new JLabel(
+  private static final JLabel MY_REQ_2 = new JLabel(
       "2) Set the time you want to change the wallpaper. " + "Not completed.");
-   
+  
+  /**
+   * Check the box if a user want to get random image from Internet instead.
+   */
+  private static final JCheckBox MY_REQ_1_NET = new JCheckBox(
+      "Get random wallpaper from Internet. "
+      + "This feature requires an Internet connection. "
+      + "Requirement 1 will be ignored.");
+  
   /**
    * Represent incomplete state of requirement 1.
    */
@@ -84,8 +96,34 @@ public class NorthCheckListPanel extends JPanel {
     // Add component.
     add(MY_OWNER);
     add(MY_CHECK_LIST);
-    add(MY_REQUIREMENT_1);
-    add(MY_REQUIREMENT_2);
+    add(MY_REQ_1);
+    add(MY_REQ_1_NET);
+    add(MY_REQ_2);
+    
+    MY_REQ_1_NET.addActionListener(new ActionListener() {
+
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        
+        if (MY_REQ_1_NET.isSelected()) {
+          
+          MY_REQ_1.setText("1) Choose folder directory. Ignored.");
+          myReq1State = true;
+          SouthDirPanel.getBrowseButton().setEnabled(false);
+          SouthDirPanel.getTextArea().setText(
+              "You are using image from the Internet. There is no need to select local picture folder.");
+          
+        } else {
+          
+          requirementSetter(10);
+          SouthDirPanel.getBrowseButton().setEnabled(true);
+          SouthDirPanel.getTextArea().setText("");
+          
+        }
+        
+      }
+      
+    });
 
   }
 
@@ -125,22 +163,22 @@ public class NorthCheckListPanel extends JPanel {
     // If something is achieved, update the check list.
     if (theRequirementNum == MY_REQ1_NOT_DONE) {
 
-      MY_REQUIREMENT_1.setText("1) Choose folder directory. Not completed.");
+      MY_REQ_1.setText("1) Choose folder directory. Not completed.");
       myReq1State = false;
 
     } else if (theRequirementNum == MY_REQ1_DONE) {
 
-      MY_REQUIREMENT_1.setText("1) Choose folder directory. Completed.");
+      MY_REQ_1.setText("1) Choose folder directory. Completed.");
       myReq1State = true;
 
     } else if (theRequirementNum == MY_REQ2_NOT_DONE) {
 
-      MY_REQUIREMENT_2.setText("2) Set the time you want to change the wallpaper. Not completed.");
+      MY_REQ_2.setText("2) Set the time you want to change the wallpaper. Not completed.");
       myReq2State = false;
 
     } else if (theRequirementNum == MY_REQ2_DONE) {
 
-      MY_REQUIREMENT_2.setText("2) Set the time you want to change the wallpaper. Completed.");
+      MY_REQ_2.setText("2) Set the time you want to change the wallpaper. Completed.");
       myReq2State = true;
 
     } 
