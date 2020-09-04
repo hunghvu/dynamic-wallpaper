@@ -5,6 +5,6 @@ package model;
  * @author Hung Vu
  *
  */
-public enum ChangeCode{
+public enum CodeChange{
   ADD_SUCCESS, ADD_FAIL, DELETE_SUCCESS, DELETE_FAIL, CLEAR, EMPTY_TRUE, EMPTY_FALSE;
 }

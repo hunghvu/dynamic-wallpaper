@@ -6,8 +6,8 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 
 import model.RandomInFolder;
-import model.TimeErrorCode;
-import model.ChangeCode;
+import model.CodeTimeError;
+import model.CodeChange;
 import model.FileArray;
 import model.TimeList;
 import view.NorthCheckListPanel;
@@ -93,31 +93,31 @@ public class Controller implements PropertyChangeListener{
   @Override
   public void propertyChange(PropertyChangeEvent evt) {
     // TODO Auto-generated method stub
-    if(evt.getNewValue().equals(ChangeCode.ADD_SUCCESS)) {
+    if(evt.getNewValue().equals(CodeChange.ADD_SUCCESS)) {
       
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Time list is succesfully updated.");
   
       // Update requirement status.
       NorthCheckListPanel.requirementSetter(21);
       
-    } else if (evt.getNewValue().equals(ChangeCode.ADD_FAIL)){
+    } else if (evt.getNewValue().equals(CodeChange.ADD_FAIL)){
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST , "Cannot add duplicate time! \n"
       + "Please try again.");
-    } else if (evt.getNewValue().equals(TimeErrorCode.OUT_OF_RANGE)) {
+    } else if (evt.getNewValue().equals(CodeTimeError.OUT_OF_RANGE)) {
       RightTextPanel.textSetter(MY_TEXT_LOG , "Time is out of range! \n"
       + "Please try again.");
-    } else if (evt.getNewValue().equals(TimeErrorCode.INVALID_CHAR)) {
+    } else if (evt.getNewValue().equals(CodeTimeError.INVALID_CHAR)) {
       RightTextPanel.textSetter(MY_TEXT_LOG, "Invalid character! \n"
       + "Please try again.");
-    } else if (evt.getNewValue().equals(TimeErrorCode.INVALID_FORMAT)) {
+    } else if (evt.getNewValue().equals(CodeTimeError.INVALID_FORMAT)) {
       RightTextPanel.textSetter(MY_TEXT_LOG, "Input should contains only \n"
       + "2 characters per field! \n"
       + "Please try again.");
-    } else if (evt.getNewValue().equals(ChangeCode.DELETE_SUCCESS)) {
+    } else if (evt.getNewValue().equals(CodeChange.DELETE_SUCCESS)) {
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Delete time successfully.");
-    } else if (evt.getNewValue().equals(ChangeCode.DELETE_FAIL)) {
+    } else if (evt.getNewValue().equals(CodeChange.DELETE_FAIL)) {
       RightTextPanel.textSetter(MY_TEXT_LOG, "Provided time is not in the list.");
-    } else if (evt.getNewValue().equals(ChangeCode.EMPTY_TRUE)) {
+    } else if (evt.getNewValue().equals(CodeChange.EMPTY_TRUE)) {
       NorthCheckListPanel.requirementSetter(20);
     }
   }

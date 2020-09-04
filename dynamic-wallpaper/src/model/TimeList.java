@@ -60,7 +60,7 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
          null,
-          ChangeCode.ADD_FAIL);
+          CodeChange.ADD_FAIL);
       
 
     } else {
@@ -72,7 +72,7 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          ChangeCode.ADD_SUCCESS);
+          CodeChange.ADD_SUCCESS);
 
 
     }
@@ -97,7 +97,7 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          ChangeCode.DELETE_SUCCESS);
+          CodeChange.DELETE_SUCCESS);
 
 
     } else {
@@ -106,7 +106,7 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          ChangeCode.DELETE_FAIL);
+          CodeChange.DELETE_FAIL);
 
 
     }
@@ -124,7 +124,7 @@ public class TimeList {
     myTimeNotifier.firePropertyChange(
         "myTimeList",
         null,
-        ChangeCode.CLEAR);
+        CodeChange.CLEAR);
 
   }
   
@@ -158,13 +158,13 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          ChangeCode.EMPTY_TRUE);
+          CodeChange.EMPTY_TRUE);
     } else {
       //Ignore old object (02/09)
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          ChangeCode.EMPTY_FALSE);
+          CodeChange.EMPTY_FALSE);
     }
 
   }
@@ -192,7 +192,7 @@ public class TimeList {
           myTimeNotifier.firePropertyChange(
               "myTimeList",
               null,
-              TimeErrorCode.OUT_OF_RANGE);
+              CodeTimeError.OUT_OF_RANGE);
 
 
         }
@@ -204,7 +204,7 @@ public class TimeList {
         myTimeNotifier.firePropertyChange(
             "myTimeList",
             null,
-            TimeErrorCode.INVALID_CHAR);
+            CodeTimeError.INVALID_CHAR);
         
         // Throw exception when string can't be parsed. 
         // Invalid input format.
@@ -220,7 +220,7 @@ public class TimeList {
       myTimeNotifier.firePropertyChange(
           "myTimeList",
           null,
-          TimeErrorCode.INVALID_FORMAT);
+          CodeTimeError.INVALID_FORMAT);
       
 
 
