@@ -5,8 +5,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
-import model.RandomInFolder;
+import model.RandomFromFolder;
 import model.CodeTimeError;
+import model.RandomFromNet;
+import model.RandomWpUpdate;
 import model.CodeChange;
 import model.FileArray;
 import model.TimeList;
@@ -18,9 +20,10 @@ public class Controller implements PropertyChangeListener{
   
   // 02/09
   private static final TimeList MY_TIME = new TimeList();
-  
-  private static RandomInFolder myAutoRun;
+//  private static final ClientForPicture MY_CLIENT = new ClientForPicture();
+  private static RandomFromFolder myFolderRun;
   private static FileArray myFile;
+ 
   
   private WindowFrame myFrame;
 
@@ -49,13 +52,13 @@ public class Controller implements PropertyChangeListener{
     
   }
   
-  public static void startBackgroundChanger() {
+  public static void startBackgroundFolder() {
     // Stop old instance of wallpaper and preview setter timer before creating a new
     // one. Set to null to persuade GC.
-    if (myAutoRun != null) {
+    if (myFolderRun != null) {
 
-      myAutoRun.autoUpdate(false);
-      myAutoRun = null;
+      myFolderRun.autoUpdate(false);
+      myFolderRun = null;
 
     }
     
@@ -63,15 +66,23 @@ public class Controller implements PropertyChangeListener{
     System.gc();
     
     // Run the program automatically.
-    myAutoRun = new RandomInFolder(myFile);
+    myFolderRun = new RandomFromFolder(myFile);
   }
   
-  public static void stopBackgroundChanger() {
-    myAutoRun.autoUpdate(false);
+  public static void stopBackgroundFolder() {
+    myFolderRun.autoUpdate(false);
   }
   
-  public static RandomInFolder getAuto() {
-    return myAutoRun;
+  public static void startBackgroundNet() {
+    
+  }
+  
+  public static void stopBackgroundNet() {
+    
+  }
+  
+  public static RandomWpUpdate getAuto() {
+    return myFolderRun;
   }
   
   public static void resetTimeList() {

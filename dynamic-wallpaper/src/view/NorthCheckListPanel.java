@@ -2,7 +2,6 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -15,9 +14,10 @@ import javax.swing.JPanel;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.CommentSize", "PMD.RedundantFieldInitializer"})
+@SuppressWarnings({ "serial", "PMD.CommentSize",
+    "PMD.LawOfDemeter", "PMD.AssignmentToNonFinalStatic"})
 public class NorthCheckListPanel extends JPanel {
-  
+
   /**
    * Indicate owner.
    */
@@ -32,40 +32,38 @@ public class NorthCheckListPanel extends JPanel {
    * First step in using a program.
    */
   private static final JLabel MY_REQ_1 = new JLabel(
-      
+
       "1) Choose folder directory. Not completed."
-      
-      );
+
+  );
 
   /**
    * Second step in using a program.
    */
   private static final JLabel MY_REQ_2 = new JLabel(
       "2) Set the time you want to change the wallpaper. " + "Not completed.");
-  
+
   /**
    * Check the box if a user want to get random image from Internet instead.
    */
-  private static final JCheckBox MY_REQ_1_NET = new JCheckBox(
-      "Get random wallpaper from Internet. "
-      + "This feature requires an Internet connection. "
-      + "Requirement 1 will be ignored.");
-  
+  private static final JCheckBox MY_REQ_1_NET = new JCheckBox("Get random wallpaper from Internet. "
+      + "This feature requires an Internet connection. " + "Requirement 1 will be ignored.");
+
   /**
    * Represent incomplete state of requirement 1.
    */
   private static final int MY_REQ1_NOT_DONE = 10;
-  
+
   /**
    * Represent completed state of requirement 1.
    */
   private static final int MY_REQ1_DONE = 11;
-  
+
   /**
    * Represent incomplete state of requirement 2.
    */
   private static final int MY_REQ2_NOT_DONE = 20;
-  
+
   /**
    * Represent completed state of requirement 2.
    */
@@ -75,56 +73,69 @@ public class NorthCheckListPanel extends JPanel {
    * State of requirement 1. <br>
    * false means incomplete, true otherwise.
    */
-  private static boolean myReq1State = false;
+  private static boolean myReq1State;
 
   /**
    * State of requirement 2. <br>
    * false means incomplete, true otherwise.
    */
-  private static boolean myReq2State = false;
+  private static boolean myReq2State;
 
   /**
    * Constructor.
    */
   public NorthCheckListPanel() {
-    //Call super.
+    // Call super.
     super();
+    
+    // Set default state for the program.
+    myReq1State = false;
+    myReq2State = false;
     
     // Panel properties.
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    
+
     // Add component.
     add(MY_OWNER);
     add(MY_CHECK_LIST);
     add(MY_REQ_1);
     add(MY_REQ_1_NET);
     add(MY_REQ_2);
-    
+
     MY_REQ_1_NET.addActionListener(new ActionListener() {
 
       @Override
-      public void actionPerformed(ActionEvent e) {
-        
+      public void actionPerformed(final ActionEvent theE) {
+
         if (MY_REQ_1_NET.isSelected()) {
-          
+
           MY_REQ_1.setText("1) Choose folder directory. Ignored.");
           myReq1State = true;
           SouthDirPanel.getBrowseButton().setEnabled(false);
-          SouthDirPanel.getTextArea().setText(
-              "You are using image from the Internet. There is no need to select local picture folder.");
-          
+          SouthDirPanel.getTextArea()
+              .setText("You are using image from the Internet. "
+                  + "There is no need to select local picture folder.");
+
         } else {
-          
+
           requirementSetter(10);
           SouthDirPanel.getBrowseButton().setEnabled(true);
           SouthDirPanel.getTextArea().setText("");
-          
+
         }
-        
+
       }
-      
+
     });
 
+  }
+
+  /**
+   * Check the state of Internet-feature check box.
+   * @return true if the box is selected, false otherwise.
+   */
+  public static boolean isInternetChosen() {
+    return MY_REQ_1_NET.isSelected();
   }
 
   /**
@@ -181,20 +192,24 @@ public class NorthCheckListPanel extends JPanel {
       MY_REQ_2.setText("2) Set the time you want to change the wallpaper. Completed.");
       myReq2State = true;
 
-    } 
-    
-    //No need in final release.
-    //    else { // For internal use only, to check when wrong parameter is passed.
+    }
+
+    // No need in final release.
+    // else { // For internal use only, to check when wrong parameter is passed.
     //
-    //      System.out.println("Wrong option, please check parameter again.");
+    // System.out.println("Wrong option, please check parameter again.");
     //
-    //    }
+    // }
 
   }
-
+  
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
-  // Class: Done PMD.
-  // Ignore redundant warning.
-  // Ignore comment size warning.
+  // Class: Done PMD. 
+  // Ignore Comment size warning.
+  // Ignore LoD.
+  // Ignore Assignment to non final static.
+  
+  // Fix Redundant field initializer.
 }

@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.jna.Native;
-import com.sun.jna.win32.StdCallLibrary;
 import java.io.File;
 import java.time.LocalTime;
 import java.util.Random;
@@ -19,47 +17,7 @@ import view.RightTextPanel;
 @SuppressWarnings({"PMD.RedundantFieldInitializer", "PMD.LawOfDemeter",
     "PMD.AssignmentToNonFinalStatic", "PMD.CommentSize", "PMD.DataflowAnomalyAnalysis",
     "PMD.DoNotCallGarbageCollectionExplicitly", "PMD.NullAssignment"})
-public class RandomInFolder {
-
-  /**
-   * Change wallpaper flag.
-   */
-  public static final int MY_SPI_WALLPAPER = 0x0014;
-
-  /**
-   * Send winini change.
-   */
-  public static final int MY_SENDCHANGE = 1;
-
-  /**
-   * Unused parameter.
-   */
-  public static final int MY_UNUSED = 0;
-
-  /**
-   * Program refresh interval (500ms).
-   */
-  private static final int MY_INTERVAL = 500;
-
-  /**
-   * Default signal to start the program.
-   */
-  private static final boolean MY_RUN_SIGNAL = true;
-  
-  /**
-   * Length of minute and hour string.
-   */
-  private static final int MY_FORMAT_LENGTH = 2;
-  
-  /**
-   * Timer for auto run.
-   */
-  private static Timer myAutoRun;
-
-  /**
-   * Store local time get form the machine.
-   */
-  private static LocalTime myTime;
+public class RandomFromFolder extends RandomWpUpdate {
 
   /**
    * List of file path.
@@ -70,62 +28,22 @@ public class RandomInFolder {
    * Picture path (randomly chosen).
    */
   private static File myPicturePath;
-
-  /**
-   * Default minute for condition checker. <br>
-   * The wallpaper can only be changed once per minute. <br>
-   * This variable will be reassigned after the program start.
-   */
-  private static int myRecentMinute = -1;
   
-  /**
-   * Interface (native library mapping) to change wallpaper.
-   * 
-   * @author Hung Vu
-   *
-   */
-  private interface JnaWallpaper extends StdCallLibrary {
-    /**
-     * Field to load USER32 library. loadLibrary deprecated, use load instead
-     */
-    JnaWallpaper INSTANCE = (JnaWallpaper) Native.load(
-        
-        "user32", 
-        JnaWallpaper.class
-        
-        );
-
-    /**
-     * Map function (Based on JNA/Microsoft document).
-     * @param theUiAction Action to perform on UI
-     * @param theUiParam Not used
-     * @param thePath Path of a picture for desktop wallpaper
-     * @param theFWinIni Not used
-     * @return a boolean, not used
-     */
-    //This is function mapping, ignore warning.
-    @SuppressWarnings("PMD.MethodNamingConventions")
-    boolean SystemParametersInfoA(
-        
-        int theUiAction, 
-        int theUiParam, 
-        String thePath, 
-        int theFWinIni
-
-        );
-
-  }
 
   /**
    * Constructor.
    * 
    * @param theFileArray picture folder path
    */
-  public RandomInFolder(final FileArray theFileArray) {
+  public RandomFromFolder(final FileArray theFileArray) {
 
     myFileArray = theFileArray;
     autoUpdate(MY_RUN_SIGNAL);
 
+  }
+  
+  public RandomFromFolder(final RandomFromNet theNet) {
+    myFileArray = null;
   }
 
   /**
@@ -205,6 +123,8 @@ public class RandomInFolder {
             // Randomize picture from path list again.
             myPicturePath = myFileArray.getFileArray()
                 [randPicture.nextInt(myFileArray.getFileArray().length)];
+            
+            System.out.println(myPicturePath);
 
             // Display picture in the preview panel.
             MiddleSettingPanel.displayPreview(myPicturePath);            
@@ -228,49 +148,11 @@ public class RandomInFolder {
 
       // Cancel the old thread before starting a new one.
       myAutoRun.cancel();
+      
+      // Set minute checker to default state (04/09)
+      myRecentMinute = -1;
 
     }
-
-  }
-
-  /**
-   * Compare the local time with time in given TIME LIST.
-   * 
-   * @param theLocalTime real clock time at the moment
-   * @return whether real time is in time list <br>
-   *         true, it's in <br>
-   *         false, otherwise
-   * 
-   */
-  private boolean compareTime(final LocalTime theLocalTime) {
-    
-    //Default value to return
-    boolean contain = false;
-    
-    // Loop through the TIME LIST.
-    for (final String time : TimeList.getTimeList()) {
-
-      // String representation format : HH:MM
-      // subString 0-2 to get HH.
-      // subString 3-end to get MM.
-      final int myHourValue = Integer.parseInt(time.substring(0, 2));
-      final int myMinuteValue = Integer.parseInt(time.substring(3));
-
-      // Perform comparison.
-      if (myHourValue == theLocalTime.getHour() && myMinuteValue == theLocalTime.getMinute()) {
-        
-        //If time is in the list, return value is set to true, then break the loop.
-        contain = true;
-        break;
-        
-      }
-
-    }
-    
-    // Call gc to collect LocalTime and String (from subString) objects. 
-    // This is required based on observation in VisualVM.
-    System.gc();
-    return contain;
 
   }
 

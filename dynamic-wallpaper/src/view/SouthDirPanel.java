@@ -18,11 +18,7 @@ import javax.swing.Timer;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({ 
-      "serial", "PMD.LawOfDemeter", "PMD.ExcessiveMethodLength",
-      "PMD.ModifiedCyclomaticComplexity", "PMD.CyclomaticComplexity",
-      "PMD.NullAssignment" 
-      })
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter",  "PMD.NullAssignment" })
 public class SouthDirPanel extends JPanel implements ActionListener {
 
   /**
@@ -58,7 +54,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
   // Remove FileArray (unused code - 09/02)
 
-  // Remove AutoRum (09/02)
+  // Remove AutoRun (09/02)
 
   /**
    * Timer to automatically update preview panel (refresh GUI). <br>
@@ -70,6 +66,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public SouthDirPanel() {
+    
     // Call super.
     super();
 
@@ -98,25 +95,33 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    * @return folder path.
    */
   public static File folderDirGetter() {
+    
     return myFolderDir;
+    
   }
-  
+
   /**
    * Return the browse button for necessary manipulation.
+   * 
    * @return the browse button
    */
   public static JButton getBrowseButton() {
+    
     return MY_DIR_BROWSE;
+    
   }
-  
+
   /**
    * Return the text are for necessary manipulation.
+   * 
    * @return the text area
    */
   public static JTextArea getTextArea() {
+    
     return MY_TEXT;
+    
   }
-  
+
   /**
    * Determine program behavior when a button is pressed.
    */
@@ -124,97 +129,16 @@ public class SouthDirPanel extends JPanel implements ActionListener {
   public void actionPerformed(final ActionEvent theE) {
 
     if (theE.getSource() == MY_DIR_BROWSE) {
-
-      // File chooser to select folder directory.
-      final JFileChooser myChooser = new JFileChooser();
-      // Limit to choosing folder path only.
-      myChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-      // "this" indicate the SouthDirPanel panel is the parent window.
-      final int chosenOption = myChooser.showOpenDialog(this);
-
-      // Close file chooser window and return absolute folder path when "open" is
-      // pressed.
-      // Print folder path to message area.
-      if (chosenOption == JFileChooser.APPROVE_OPTION) {
-
-        // Get the absolute path.
-        myFolderDir = myChooser.getSelectedFile().getAbsoluteFile();
-
-        // Print message.
-        MY_TEXT.setText("Picture(s) in directory: " + myFolderDir
-            + "\n If the path is changed, please press Apply button again. \n \n"
-            + "Important: Please ensuring all files in the choosen folder are pictures. \n"
-            + "In case a non-picture file like .txt is choosen, it cannot be set as the \n"
-            + "desktop background. Therefore, the background will be set to black wallpaper!");
-
-        // Update the requirement checker.
-        NorthCheckListPanel.requirementSetter(11);
-
-      }
+      
+      dirButtonAction();
 
     } else if (theE.getSource() == MY_APPLY) {
-      // Requirement must be all checked before apply (add later) (6/7/20).
-      // Done (6/11/20).
-
-      if (NorthCheckListPanel.is1Incomplete() || NorthCheckListPanel.is2Incomplete()) {
-        // Print message when either of the requirement is not satisfied.
-        // (Either is true).
-
-        RightTextPanel.textSetter(MY_LOG_OPTION, "Some requirements are not yet completed! \n"
-            + "Please complete all the requirements first then try again.");
-
-      } else {
-
-        // Stop old instance of (GUI/revalidate/repaint update) timer before creating a
-        // new one. Set to null to persuade GC.
-        if (myUpdateTimer != null) {
-
-          myUpdateTimer.stop();
-          myUpdateTimer = null;
-
-        }
-
-        controller.Controller.createFileArray(myFolderDir);
-        controller.Controller.startBackgroundChanger();
-
-        // Timer for automatic repaint/revalidate.
-        myUpdateTimer = new Timer(250, this); // Action listener (this)
-        myUpdateTimer.start();
-
-        // Print message after apply button is pressed.
-        RightTextPanel.textSetter(MY_LOG_OPTION, "Apply completed.");
-
-        // Display running state.
-        MiddleSettingPanel.setRunStatus(true);
-
-      }
+      applyButtonAction();
 
     } else if (theE.getSource() == MY_STOP) {
       // Stop the program.
 
-      // When timer are null.
-      if (myUpdateTimer == null || controller.Controller.getAuto() == null) {
-
-        RightTextPanel.textSetter(MY_LOG_OPTION, "Program is currently not running!");
-
-      } else {
-        // When timer are set.
-
-        // Stop the threads.
-        myUpdateTimer.stop();
-        controller.Controller.stopBackgroundChanger();
-
-        // Display log.
-        RightTextPanel.textSetter(
-            MY_LOG_OPTION, 
-            "Program has stopped. \n" + "Please press Apply button to restart!"
-        );
-
-        // Display running status.
-        MiddleSettingPanel.setRunStatus(false);
-
-      }
+      stopButtonAction();
 
     } else if (theE.getSource() == myUpdateTimer) {
       // Event is invoked after a certain time.
@@ -227,14 +151,130 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
   }
 
+  /**
+   * This is the action perfomed when Stop button is chosen.
+   */
+  private void stopButtonAction() {
+    
+    // When timer are null.
+    if (myUpdateTimer == null || controller.Controller.getAuto() == null) {
+
+      RightTextPanel.textSetter(MY_LOG_OPTION, "Program is currently not running!");
+
+    } else {
+      // When timer is set.
+
+      // Stop the threads.
+      myUpdateTimer.stop();
+
+      if (NorthCheckListPanel.isInternetChosen()) {
+        controller.Controller.stopBackgroundNet();
+      } else {
+        controller.Controller.stopBackgroundFolder();
+      }
+
+      // Display log.
+      RightTextPanel.textSetter(
+          
+          MY_LOG_OPTION, 
+          "Program has stopped. \n" + "Please press Apply button to restart!"
+          
+      );
+
+      // Display running status.
+      MiddleSettingPanel.setRunStatus(false);
+
+    }
+    
+  }
+
+  /**
+   * This is the action performed when Apply button is chosen.
+   */
+  private void applyButtonAction() {
+
+    if (NorthCheckListPanel.is1Incomplete() || NorthCheckListPanel.is2Incomplete()) {
+      // Print message when either of the requirement is not satisfied.
+      // (Either is true).
+
+      RightTextPanel.textSetter(MY_LOG_OPTION, "Some requirements are not yet completed! \n"
+          + "Please complete all the requirements first then try again.");
+
+    } else {
+
+      // Stop old instance of (GUI/revalidate/repaint update) timer before creating a
+      // new one. Set to null to persuade GC.
+      if (myUpdateTimer != null) {
+
+        myUpdateTimer.stop();
+        myUpdateTimer = null;
+
+      }
+
+      if (NorthCheckListPanel.isInternetChosen()) {
+        controller.Controller.startBackgroundNet();
+      } else {
+        controller.Controller.createFileArray(myFolderDir);
+        controller.Controller.startBackgroundFolder();
+      }
+
+      // Timer for automatic repaint/revalidate.
+      myUpdateTimer = new Timer(250, this); // Action listener (this)
+      myUpdateTimer.start();
+
+      // Print message after apply button is pressed.
+      RightTextPanel.textSetter(MY_LOG_OPTION, "Apply completed.");
+
+      // Display running state.
+      MiddleSettingPanel.setRunStatus(true);
+
+    }
+  }
+  
+  /**
+   * This is the action performed when Browse button is chosen.
+   */
+  private void dirButtonAction() {
+    
+    // File chooser to select folder directory.
+    final JFileChooser myChooser = new JFileChooser();
+    // Limit to choosing folder path only.
+    myChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+    // "this" indicate the SouthDirPanel panel is the parent window.
+    final int chosenOption = myChooser.showOpenDialog(this);
+
+    // Close file chooser window and return absolute folder path when "open" is
+    // pressed.
+    // Print folder path to message area.
+    if (chosenOption == JFileChooser.APPROVE_OPTION) {
+
+      // Get the absolute path.
+      myFolderDir = myChooser.getSelectedFile().getAbsoluteFile();
+
+      // Print message.
+      MY_TEXT.setText("Picture(s) in directory: " + myFolderDir
+          + "\n If the path is changed, please press Apply button again. \n \n"
+          + "Important: Please ensuring all files in the choosen folder are pictures. \n"
+          + "In case a non-picture file like .txt is choosen, it cannot be set as the \n"
+          + "desktop background. Therefore, the background will be set to black wallpaper!");
+
+      // Update the requirement checker.
+      NorthCheckListPanel.requirementSetter(11);
+
+    }
+    
+  }
+  
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
   // Ignore potential violation of Law of Demeter (LoD).
-  // Ignore redundant warning.
-  // Ignore excessive method length (override action performed).
-  // Ignore modified cyclomatic complexity.
   // Ignore null assignment.
-  // Ignore do not call gc explicitly.
-
+  
+  // Fix Do not call GC explicitly.
+  // Fix Excessive method length (by refactoring).
+  // Fix Cyclomatic complexity (all types).
+  
 }

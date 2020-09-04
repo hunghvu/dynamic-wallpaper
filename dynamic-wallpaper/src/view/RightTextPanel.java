@@ -11,13 +11,13 @@ import javax.swing.JTextArea;
 import model.TimeList;
 
 /**
- * This class creates right/text panel, <br> 
+ * This class creates right/text panel, <br>
  * to display information (log and time list).
  * 
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.LawOfDemeter"})
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter" })
 public class RightTextPanel extends JPanel implements ActionListener {
 
   /**
@@ -81,12 +81,12 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * TIME LIST area label.
    */
   private static final JLabel MY_TIME_LABEL = new JLabel("TIME LIST:");
-  
+
   /**
    * Parameter to print message to text log.
    */
   private static final String MY_LOG_TEXT = "LOG";
-  
+
   /**
    * Parameter to print message to Time List.
    */
@@ -96,9 +96,10 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public RightTextPanel() {
-    //Call super.
-    super();
     
+    // Call super.
+    super();
+
     // Panel properties.
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -141,14 +142,14 @@ public class RightTextPanel extends JPanel implements ActionListener {
       MY_TEXT_LOG.append(theMsg + "\n \n");
       MY_TEXT_TIME_LIST.setText(String.join("\n \n", TimeList.getTimeList()));
 
-    } 
-    
-    //No need in final release.
-    //    else { // For internal use only, to check when wrong parameter is passed.
+    }
+
+    // No need in final release.
+    // else { // For internal use only, to check when wrong parameter is passed.
     //
-    //      System.out.println("Wrong option, please check parameter again.");
+    // System.out.println("Wrong option, please check parameter again.");
     //
-    //    }
+    // }
   }
 
   /**
@@ -171,12 +172,10 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
       // Change requirement checklist.
       NorthCheckListPanel.requirementSetter(20);
-      
+
       // Display log.
-      MY_TEXT_LOG.append("Clear time list successfully! \n" 
-          + "If the program is still running, \n" 
-          + "please add new time to the list, \n"
-          + "or stop the program. \n \n");
+      MY_TEXT_LOG.append("Clear time list successfully! \n" + "If the program is still running, \n"
+          + "please add new time to the list, \n" + "or stop the program. \n \n");
 
       // Reset time list display/message.
       MY_TEXT_TIME_LIST.setText("");
@@ -185,8 +184,11 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
   }
 
+  //Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
+  
+  // Ignore LoD
 
 }

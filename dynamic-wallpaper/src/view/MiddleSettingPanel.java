@@ -19,12 +19,12 @@ import javax.swing.JTextField;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.LawOfDemeter", "PMD.NullAssignment",
-    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly",
-    "PMD.UnusedAssignment"})
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.NullAssignment", 
+    "PMD.DataflowAnomalyAnalysis","PMD.DoNotCallGarbageCollectionExplicitly", 
+    "PMD.UnusedAssignment" })
 public class MiddleSettingPanel extends JPanel implements ActionListener {
 
-  //Remove time list (02/09)
+  // Remove time list (02/09)
 
   /**
    * Save the time to change wallpaper.
@@ -58,7 +58,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
       "Next Wallpaper Preview", JLabel.CENTER
 
-      );
+  );
 
   /**
    * Label to indicate status of the program.
@@ -94,6 +94,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public MiddleSettingPanel() {
+    
     // Call super.
     super();
 
@@ -107,7 +108,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     MY_HOUR.setPreferredSize(new Dimension(20, 20));
     MY_MINUTE.setPreferredSize(new Dimension(20, 20));
     MY_PREVIEW_LABEL.setPreferredSize(new Dimension(120, 120));
-    MY_STATUS_LABEL.setPreferredSize(new Dimension(120, 20)); //Actual min height: 9, width 111
+    MY_STATUS_LABEL.setPreferredSize(new Dimension(120, 20)); // Actual min height: 9, width 111
 
     // Create sub-panel for South region of this panel. BorderLayout only allow 1
     // component per region.
@@ -126,6 +127,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     add(MY_PREVIEW_LABEL, BorderLayout.NORTH);
     add(MY_PREVIEW_PANEL, BorderLayout.CENTER);
     add(subSouth, BorderLayout.SOUTH);
+    
   }
 
   /**
@@ -152,9 +154,10 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   /**
    * Display the status of program.
+   * 
    * @param theStatus Indicates whether the program is running. <br>
-   True is running <br>
-   false otherwise.
+   *                  True is running <br>
+   *                  false otherwise.
    */
   public static void setRunStatus(final boolean theStatus) {
     if (theStatus) {
@@ -166,6 +169,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
       MY_STATUS_LABEL.setText("Status: Not Running");
 
     }
+    
   }
 
   /**
@@ -179,17 +183,16 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     // Get original image icon.
     ImageIcon originalIcon = new ImageIcon(thePath.toString());
 
-    //Get original image.
+    // Get original image.
     Image originalImage = originalIcon.getImage();
 
-    //Image to resize
+    // Image to resize
     Image resized = originalImage.getScaledInstance(
 
-        MY_RESIZE_W, //776 fit left margin 774 fit right margin
-        MY_RESIZE_H,
-        Image.SCALE_DEFAULT
+        MY_RESIZE_W, // 776 fit left margin 774 fit right margin
+        MY_RESIZE_H, Image.SCALE_DEFAULT
 
-        );
+    );
 
     // Previewed image after resized.
     myWallpaperImage = new ImageIcon(resized);
@@ -200,19 +203,19 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     // Add label (image) to the panel.
     MY_PREVIEW_PANEL.add(myImageLabel);
 
-    //Destroy image in memory. To prevent memory leak from them.
+    // Destroy image in memory. To prevent memory leak from them.
     originalImage.flush();
     resized.flush();
 
-    //Set to null to persuade garbage collection.
-    //Not reliable, only to limit the possibility of memory leak.
+    // Set to null to persuade garbage collection.
+    // Not reliable, only to limit the possibility of memory leak.
     originalIcon = null;
     originalImage = null;
     resized = null;
     myWallpaperImage = null;
     myImageLabel = null;
 
-    //Collect heap garbage.
+    // Collect heap garbage.
     System.gc();
 
   }
@@ -231,10 +234,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
 
-
-
       //////////////////////////////////
-
 
     } else if (theE.getSource() == MY_CLEAR_TIME) { // Clear input fields.
 
@@ -242,28 +242,33 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
       MY_MINUTE.setText("");
 
     } else if (theE.getSource() == MY_DELETE_TIME) {
+      
       // Delete time (from string time list)
       // and update message.
       controller.Controller.deleteTime(getMyHourText(), getMyMinuteText());
       controller.Controller.emptyTime();
 
-
       // Reset text field after button is pressed
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
+      
     }
 
   }
 
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  // Ignore Cyclomatic-complexity-type error.
   // Ignore Law of Demeter (LoD) potential violation.
-  // Ignore Excessive Method length (action performed).
-  // Ignore Avoid duplicate literal ("Please try again." 4 times).
+  // Ignore Null assignment.
   // Ignore Data flow anomaly (set variables to null).
-  // Ignore null assignment.
-  // Ignore do not call gc explicitly.
-
+  // Ignore Do not call GC explicitly.
+  // Ignore Unused assignment.
+  
+  // Fix Cyclomatic complexity (all types).
+  // Fix Excessive method length (by the introduce of controller).
+  // Fix Avoid duplicate literals.
+  
+  
 }

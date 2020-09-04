@@ -1,15 +1,14 @@
 package model;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.ConnectException;
 import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpClient.Builder;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
@@ -24,23 +23,23 @@ import javax.swing.JLabel;
  * @author Hung Vu
  *
  */
-public class InternetClient {
+public class RandomFromNet extends RandomWpUpdate{
 
   private static final Double MY_RESOLUTION_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().getWidth();
   private static final Double MY_RESOLUTION_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().getHeight();
   private static final String MY_TMP_DIR = new File(System.getProperty("java.io.tmpdir")).getPath();
   private static String myUri;
   private static HttpRequest myRequest;
-  private static File myCache;
+  private static File myCachePath;
   
-  public InternetClient() {
+  public RandomFromNet() {
     
     myUri = "https://picsum.photos/" + MY_RESOLUTION_WIDTH.intValue() + "/" 
     + MY_RESOLUTION_HEIGHT.intValue();
     
   }
   
-  public void getRegularPicture() {
+  private void getRegularPicture() {
     
     myRequest = HttpRequest.newBuilder()
         .GET()
@@ -55,7 +54,7 @@ public class InternetClient {
           .build()
           .send(myRequest, HttpResponse.BodyHandlers.ofInputStream());
       Image img = ImageIO.read(response.body());
-      myCache = new File(MY_TMP_DIR + "cacheBg.jpg");
+      myCachePath = new File(MY_TMP_DIR + "cacheBg.jpg");
       
       JFrame frame = new JFrame();
       JLabel label = new JLabel(new ImageIcon(img));
@@ -63,6 +62,9 @@ public class InternetClient {
       frame.pack();
       frame.setVisible(true);
       
+    } catch (ConnectException e) {
+      // Make a call to controller/view to update message or dialog.
+      System.out.println(1);
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
@@ -70,20 +72,24 @@ public class InternetClient {
       // TODO Auto-generated catch block
       e.printStackTrace();
     } 
-//    catch (ConnectionException e) {
-//      
-//    }
+
     
     
   }
   
   public File getCacheFile() {
-    return myCache;
+    return myCachePath;
   }
   
   public static void main(String[] args) {
-    InternetClient client = new InternetClient();
+    RandomFromNet client = new RandomFromNet();
     client.getRegularPicture();
+    
+  }
+
+  @Override
+  public void autoUpdate(boolean theSignal) {
+    // TODO Auto-generated method stub
     
   }
 }

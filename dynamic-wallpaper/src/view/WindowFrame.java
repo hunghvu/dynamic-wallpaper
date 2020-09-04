@@ -107,7 +107,7 @@ public class WindowFrame extends JFrame {
         public void windowIconified(final WindowEvent theE) {
 
           setVisible(false);
-          
+
           // Show message to let user know the program is minimized to system tray.
           final JFrame msgFrame = new JFrame();
           JOptionPane.showMessageDialog(msgFrame, "The program is now minimized to system tray.");
@@ -217,6 +217,7 @@ public class WindowFrame extends JFrame {
         }
 
       });
+      
       try {
         // Add tray icon to system tray.
         // Throw exception when system tray is not available.
@@ -234,7 +235,9 @@ public class WindowFrame extends JFrame {
       // For internal use only
 
       System.out.println("System tray is not available.");
+      
     }
+    
   }
 
   /**
@@ -244,10 +247,10 @@ public class WindowFrame extends JFrame {
    */
   @SuppressWarnings("resource")
   private static boolean isLocked() {
-    
+
     // Validator
     boolean locking = false;
-    
+
     // System tmp directory. We don't care where it is located.
     final String tmpPath = new File(System.getProperty("java.io.tmpdir")).getPath();
 
@@ -305,7 +308,8 @@ public class WindowFrame extends JFrame {
    */
   @SuppressWarnings("resource")
   private static boolean isRunning(final FileChannel theChannel) throws IOException {
-    // Return only once variable.
+    
+    // Return only one variable.
     boolean running;
 
     // Acquire a lock from a file.
@@ -336,14 +340,21 @@ public class WindowFrame extends JFrame {
 
   }
   
+  
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
   // Ignore Do not call system exit (don't kill VM).
-  // Ignore Excessive method length.
-  // Ignore LoD.
-  // Ignore SystemPrintln.
-  // Ignore Data flow anomaly analysis.
   // Ignore close resource (File channel and random access file).
+  // Ignore SystemPrintln.
+  // Ignore LoD.
+  // Ignore Data flow anomaly analysis.
+  // Ignore Excessive method length.
+  // Method refactoring is performed.
+
+
+
+
 
 }
