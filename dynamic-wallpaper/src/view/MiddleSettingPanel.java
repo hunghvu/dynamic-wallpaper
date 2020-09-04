@@ -20,7 +20,7 @@ import javax.swing.JTextField;
  *
  */
 @SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.NullAssignment", 
-    "PMD.DataflowAnomalyAnalysis","PMD.DoNotCallGarbageCollectionExplicitly", 
+    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly", 
     "PMD.UnusedAssignment" })
 public class MiddleSettingPanel extends JPanel implements ActionListener {
 

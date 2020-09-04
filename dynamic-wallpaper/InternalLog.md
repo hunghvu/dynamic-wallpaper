@@ -12,6 +12,10 @@
 - The first (final) release.
 ___
 
+## 2020/09/04
+- Multiple refactoring to view and model.
+- Preliminary comments for controller, PMD + Checkstyle for TimeList.
+
 ## 2020/09/03
 - Display message panel when a user minimize the program.
 - Fix time list not display minute properly (E.g: 17:2 to -> 17:02).
