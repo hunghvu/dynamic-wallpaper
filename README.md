@@ -1,14 +1,15 @@
-# Dynamic Wallpaper
+# [Dynamic Wallpaper](https://github.com/hunghvu/dynamic-wallpaper)
 - A small program, written in Java, allows users to automatically change their desktop wallpaper at a specific time in the day.
 - Users will first choose their picture folder, then the program will **randomly** choose one image and set it as wallpaper.
 - Initially, I'm learning on how Java interacts and modifies the OS, and coincidentally, my sister asked whether I know any kind of program that randomly changes wallpaper. Well, I don't know, so I decided to create one myself and here it is.
 
 ## Latest version
-### [1.0.0.3] - 07-14-2020
-- Packaged version, Open JDK 14.0.2 is included to improve portabiltiy.
-- Compared to **v1.0.0.2**, there is no change in the source code.
-### [1.0.0.2] - 06-17-2020 
-- Contains only an executable (.exe) file.
+- **[1.0.0.3](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.0.3) - 07-14-2020**
+  - Packaged version, Open JDK 14.0.2 is included to improve portabiltiy.
+  - Compared to **v1.0.0.2**, there is no change in the source code.
+  
+- **[1.0.0.2](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.0.2) - 06-17-2020** 
+  - Contains only an executable (.exe) file.
 
 ## The GUI
 <!---
@@ -23,9 +24,13 @@
 - I draw the icon for this program myself using Microsoft Paint. Just a simple icon contains the letters "D" and "W"! Then, I convert it to .ico file using [ICO CONVERTER](https://www.icoconverter.com/).
 - The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
 - The project uses and redistributes the latest [Open JDK](https://jdk.java.net/14/) version, 14.0.2, as of 2020/07/14. I don't own nor be a contributor to the Open JDK. All rights reserved to its respective owners/contributors/creators.
+- **Update (09/03/2020)**: 
+  - The next version (still in development) of this program will have API call(s) to [Lorem Picsum](https://picsum.photos/) to support new feature(s). This is also my attempt to work with RESTful API because I'm learning about that concept. Although this project is mainly used to support my self-learning process, I'm not entirely sure if publishing code (or executable file) with an API call to Lorem Picsum on GitHub is permitted. As I couldn't find a way to contact to Lorem Picsum staffs to ask about this matter, I want to experess my concern here. 
+  - If anyone believes the mentioned action(s) isn't accepted, please notify me via my email so I can fix the problem. I'd like to have a discussion about this too as I'm actually curious about how API call is shown in an open source project/codebase.
+  - I also asked a question about this matter on [Open Source Stack Exchange](https://opensource.stackexchange.com/questions/10369/publish-code-on-github-with-a-call-to-public-api) too. I appreciate if you can go there and give your view on this matter.
 
 ## What I have struggle and learned about in this project
-Major. These are new to me, so it's really nice to learn about them.
+**Major**. These are new to me, so it's really nice to learn about them.
 - The way to package .jar and runnable .jar, and how it performs based on my code (E.g: images must be inside a package to be exported to runnable jar, etc).
 - How to convert .jar to .exe using Launch4j by Grzegorz Kowal.
 - How to install and use external library ([JNA](https://github.com/java-native-access/jna)).
@@ -33,7 +38,7 @@ Major. These are new to me, so it's really nice to learn about them.
 - How to use GitHub (push, pull, backup, comment, etc).
 - How to use [VisualVM](https://visualvm.github.io/features.html) by Jiri Sedlacek, and Tomas Hurka to observe heap usage of VM.
 
-Minor. I already learned these concepts before, and this project help me improve my knowledge on them. Still, there is a long way to go.
+**Minor**. I already learned these concepts before, and this project help me improve my knowledge on them. Still, there is a long way to go.
 - Garbage collection in Java (to fix memory leak issue).
 - Static concept in Java.
 - GUI design (properties of components, layouts, etc).
@@ -43,3 +48,4 @@ Minor. I already learned these concepts before, and this project help me improve
 ## License
 This project is protected under GPLv2 license. <br>
 Copyright (c) 2020 Hung Huu Vu
+
