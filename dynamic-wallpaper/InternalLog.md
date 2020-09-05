@@ -18,6 +18,7 @@ ___
 - Fix an unexpected behavior when user press Apply button multiple times, by introducing flag to "Apply" action.
 - Fix a wrong path to create temporary lock file. It should be in system "temp" folder.
 - Successfully cache the image on local system.
+- Basically complete implementation of the new feature. Use image from the Internet to set as wallpaper. However, still need to test and refactoring.
 
 ## 2020/09/03
 - Display message panel when a user minimize the program.
