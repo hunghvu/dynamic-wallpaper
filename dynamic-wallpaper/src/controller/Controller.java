@@ -136,7 +136,21 @@ public class Controller implements PropertyChangeListener {
    * pictures taken from the Internet.
    */
   public static void startBackgroundNet() {
+    
+    // Stop old instance of wallpaper and preview setter timer before creating a new
+    // one. Set to null to persuade GC.
+    if (myNetRun.getRunFlage()) {
 
+      myNetRun.autoUpdate(false);
+
+    }
+    
+    // Garbage collection.
+    System.gc();
+    
+    // Run the process.
+    myNetRun.autoUpdate(true);
+    
   }
   
   /**
@@ -144,16 +158,28 @@ public class Controller implements PropertyChangeListener {
    * pictures taken from the Internet.
    */
   public static void stopBackgroundNet() {
-
+    
+    myNetRun.autoUpdate(false);
+    
   }
   
   /**
    * Get the state of folder-based wallpaper updater process.
    * @return null means the process is not running, otherwise it is running.
    */
-  public static RandomFromFolder getAuto() {
+  public static RandomFromFolder getFolderAutoState() {
     
     return myFolderRun;
+    
+  }
+  
+  /**
+   * Get the state of internet-based wallpaper updater process.
+   * @return false means the process is not running, otherwise it is running.
+   */
+  public static boolean getNetRunState() {
+    
+    return myNetRun.getRunFlage();
     
   }
   

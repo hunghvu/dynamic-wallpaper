@@ -169,7 +169,13 @@ public class SouthDirPanel extends JPanel implements ActionListener {
   private void stopButtonAction() {
     
     // When timer are null.
-    if (myUpdateTimer == null || controller.Controller.getAuto() == null) {
+    if (
+        
+        myUpdateTimer == null 
+        || ( controller.Controller.getFolderAutoState() == null 
+        && !controller.Controller.getNetRunState() )
+        
+        ) {
 
       RightTextPanel.textSetter(MY_LOG_OPTION, "Program is currently not running!");
 
@@ -232,10 +238,14 @@ public class SouthDirPanel extends JPanel implements ActionListener {
       }
 
       if (NorthCheckListPanel.isInternetChosen()) {
+        
         controller.Controller.startBackgroundNet();
+        
       } else {
+        
         controller.Controller.createFileArray(myFolderDir);
         controller.Controller.startBackgroundFolder();
+        
       }
 
       // Timer for automatic repaint/revalidate.

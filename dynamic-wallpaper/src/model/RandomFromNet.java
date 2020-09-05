@@ -14,10 +14,17 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.time.LocalTime;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
+import view.MiddleSettingPanel;
+import view.RightTextPanel;
 
 /**
  * This class will provide an HTTP client to get
@@ -69,6 +76,11 @@ public class RandomFromNet extends AbstractUpdater {
   private static PropertyChangeSupport myNetNotifier;
   
   /**
+   * Flag to indicate if the process is running.
+   */
+  private static boolean myRunFlag = false;
+  
+  /**
    * Constructor.
    */
   public RandomFromNet() {
@@ -87,15 +99,117 @@ public class RandomFromNet extends AbstractUpdater {
     myNetNotifier.addPropertyChangeListener(theListener);
   }
   
-  public static void main(String[] args) {
-    RandomFromNet client = new RandomFromNet();
-    client.getRegularPicture();
+  /**
+   * Get running state.
+   * @return true if the process is running, false otherwise.
+   */
+  public boolean getRunFlage() {
+    
+    return myRunFlag;
     
   }
+  
+//  public static void main(String[] args) {
+//    RandomFromNet client = new RandomFromNet();
+//    client.getRegularPicture();
+//    
+//  }
 
   @Override
   public void autoUpdate(boolean theSignal) {
-    // TODO Auto-generated method stub
+    
+    // Run if theSignal is true, else cancel old thread.
+    if (theSignal) {
+      
+      // Sett myRunFlag to true
+      myRunFlag = theSignal;
+      
+      this.getRegularPicture();
+      
+      // Set timer for changing preview panel and set desktop wallpaper.
+      myAutoRun = new Timer();
+      myAutoRun.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          
+          // Get local time.
+          myTime = LocalTime.now();
+          
+          // In the same minute, only change 1 time.
+          // myRecentMinute must be different compared to
+          // real time from getMinute() to proceed.
+          if (compareTime(myTime) && myRecentMinute != myTime.getMinute()) {
+            
+            // Set desktop wallpaper.
+            JnaWallpaper.INSTANCE.SystemParametersInfoA(
+
+                MY_SPI_WALLPAPER, MY_UNUSED, myCachePath.toString(), MY_SENDCHANGE
+
+            );
+            
+            // Get string from of hour and minute.
+            StringBuilder hour = new StringBuilder();
+            StringBuilder minute = new StringBuilder();
+            hour.append(myTime.getHour());
+            minute.append(myTime.getMinute());
+
+            // Format hour (HH).
+            if (hour.length() != MY_FORMAT_LENGTH) {
+              hour.append(0);
+              hour.reverse();
+            }
+
+            // Format minute (MM).
+            if (minute.length() != MY_FORMAT_LENGTH) {
+              minute.append(0);
+              minute.reverse();
+            }
+
+            // Print message when wallpaper is changed.
+            RightTextPanel.textSetter(
+
+                "LOG", hour + ":" + minute + " - " + "Change wallpaper successfully!"
+
+            );
+            
+            // Randomize picture again.
+            getRegularPicture();
+            
+            // Display picture in the preview panel.
+            MiddleSettingPanel.displayPreview(myCachePath);
+            
+            // Set a latest real minute to myRecentMinute (E.g: 2 mins into
+            // 1-min-myRecentMinute)
+            myRecentMinute = myTime.getMinute();
+            
+            // Set to null to persuade garbage collection.
+            hour = null;
+            minute = null;
+
+            // Collect garbage.
+            System.gc();
+            
+          }
+          
+        }
+        
+        // End of Timer task;
+      }, MY_UNUSED, MY_INTERVAL);
+      
+      // End of schedule.
+      
+    } else {
+      
+      // Set myRunFlag to false.
+      myRunFlag = theSignal;
+      
+      // Cancel the old thread before starting a new one.
+      myAutoRun.cancel();
+
+      // Set minute checker to default state (04/09)
+      myRecentMinute = -1;
+      
+    }
     
   }
   
@@ -131,13 +245,20 @@ public class RandomFromNet extends AbstractUpdater {
       // Cache the image.
       ImageIO.write(img, "png", myCachePath);
       
+//      // Set to null to persuade GC.
+//      myRequest = null;
+//      response = null;
+//      img = null;
+//      
+//      // Garbage collection.
+//      System.gc();
       
-      // For testing purpose only.
-      JFrame frame = new JFrame();
-      JLabel label = new JLabel(new ImageIcon(img));
-      frame.getContentPane().add(label, BorderLayout.CENTER);
-      frame.pack();
-      frame.setVisible(true);
+//      // For testing purpose only.
+//      JFrame frame = new JFrame();
+//      JLabel label = new JLabel(new ImageIcon(img));
+//      frame.getContentPane().add(label, BorderLayout.CENTER);
+//      frame.pack();
+//      frame.setVisible(true);
       
     } catch (ConnectException e) {
       

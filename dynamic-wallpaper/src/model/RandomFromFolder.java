@@ -135,7 +135,10 @@ public class RandomFromFolder extends AbstractUpdater {
           }
 
         }
+        // End of timer task.
       }, MY_UNUSED, MY_INTERVAL);
+      
+      // End of schedule.
 
     } else {
 
