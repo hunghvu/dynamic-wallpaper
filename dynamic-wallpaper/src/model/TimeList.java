@@ -60,12 +60,12 @@ public class TimeList {
 
       myTimeList.remove(theTime);
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.DELETE_SUCCESS);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.DELETE_SUCCESS);
 
     } else {
 
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.DELETE_FAIL);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.DELETE_FAIL);
 
     }
 
@@ -79,7 +79,7 @@ public class TimeList {
     myTimeList.clear();
 
     // Ignore old object (02/09)
-    myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.CLEAR);
+    myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.CLEAR);
 
   }
 
@@ -113,12 +113,12 @@ public class TimeList {
     if (myTimeList.isEmpty()) {
       
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.EMPTY_TRUE);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.EMPTY_TRUE);
       
     } else {
       
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.EMPTY_FALSE);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.EMPTY_FALSE);
       
     }
 
@@ -148,14 +148,14 @@ public class TimeList {
         } else { // Time is out of range.
 
           // Ignore old object (02/09)
-          myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeError.OUT_OF_RANGE);
+          myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeError.TIME_OUT_OF_RANGE);
 
         }
 
       } catch (NumberFormatException e) {
 
         // Ignore old object (02/09)
-        myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeError.INVALID_CHAR);
+        myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeError.TIME_INVALID_CHAR);
 
         // Throw exception when string can't be parsed.
         // Invalid input format.
@@ -165,7 +165,7 @@ public class TimeList {
     } else { // Invalid input format: length != 2.
 
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeError.INVALID_FORMAT);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeError.TIME_INVALID_FORMAT);
 
     }
 
@@ -195,7 +195,7 @@ public class TimeList {
     if (myTimeList.contains(time)) {
 
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.ADD_FAIL);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.ADD_FAIL);
 
     } else {
 
@@ -203,7 +203,7 @@ public class TimeList {
       Collections.sort(myTimeList);
 
       // Ignore old object (02/09)
-      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeChange.ADD_SUCCESS);
+      myTimeNotifier.firePropertyChange(MY_TIME_LIST_NAME, null, CodeTimeAction.ADD_SUCCESS);
 
     }
 

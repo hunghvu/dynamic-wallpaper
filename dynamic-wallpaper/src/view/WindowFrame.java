@@ -260,7 +260,7 @@ public class WindowFrame extends JFrame {
     // ClassLoader.getSystemClassLoader().getResource(".").getPath();
 
     // Create a path for lock file.
-    WindowFrame.lockFile = new File(tmpPath + "jvm.lock");
+    WindowFrame.lockFile = new File(tmpPath + "\\jvm.lock");
 
     // The following section ensure only 1 instance of the program
     // can be executed at a time.

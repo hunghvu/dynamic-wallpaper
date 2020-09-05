@@ -6,9 +6,13 @@ package model;
  * @author Hung Vu
  *
  */
-public enum CodeTimeError {
-
-  OUT_OF_RANGE, INVALID_CHAR, INVALID_FORMAT;
+public enum CodeError {
+  
+  // Error in TimeList.
+  TIME_OUT_OF_RANGE, TIME_INVALID_CHAR, TIME_INVALID_FORMAT, 
+  
+  // Error in RandomFromNet.
+  NET_NO_CONNECTION;
 
 }
 

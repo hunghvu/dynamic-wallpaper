@@ -3,7 +3,14 @@ package model;
 import java.time.LocalTime;
 import java.util.Timer;
 
-public abstract class RandomWpUpdate {
+/**
+ * This is a base class to provide wallpaper update functionality.
+ * @author Hung Vu
+ *
+ */
+@SuppressWarnings({"PMD.DataflowAnomalyAnalysis", "PMD.AtLeastOneConstructor",
+    "PMD.DoNotCallGarbageCollectionExplicitly"})
+public abstract class AbstractUpdater {
 
   /**
    * Change wallpaper flag.
@@ -43,12 +50,13 @@ public abstract class RandomWpUpdate {
    * This variable will be reassigned after the program start.
    */
   protected static int myRecentMinute = -1;
-
-  public RandomWpUpdate() {
-    super();
-  }
   
-  public abstract void autoUpdate (boolean theSignal);
+  /**
+   * Auto update wallpaper (process).
+   * @param theSignal signal to set state for the process. <br>
+   *                  true means running, false otherwise.
+   */
+  public abstract void autoUpdate(boolean theSignal);
 
   /**
    * Compare the local time with time in given TIME LIST.
@@ -90,5 +98,14 @@ public abstract class RandomWpUpdate {
     return contain;
   
   }
+  
+  // Temporary, as of 09/04/20:
+  // Class: Done Recomment.
+  // Class: Done Checkstyle.
+  // Class: Done PMD.
+  
+  // Ignore Data flow anomaly analysis.
+  // Ignore At least one constructor.
+  // Ignore Do not call GC explicitly.
 
 }

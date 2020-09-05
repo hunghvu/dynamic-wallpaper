@@ -4,8 +4,8 @@ import java.awt.EventQueue;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import model.CodeChange;
-import model.CodeTimeError;
+import model.CodeError;
+import model.CodeTimeAction;
 import model.FileArray;
 import model.RandomFromFolder;
 import model.RandomFromNet;
@@ -27,9 +27,18 @@ public class Controller implements PropertyChangeListener {
    */
   private static final TimeList MY_TIME = new TimeList();
   
-  private static final String MY_TRY_AGAIN = "Please try again.";
   /**
-   * Background process to change wallpaper from picture in selected folder.
+   * Background process to change wallpaper using picture from Internet.
+   */
+  private static final RandomFromNet myNetRun = new RandomFromNet();
+  
+  /**
+   * String message to print when an error occurs.
+   */
+  private static final String MY_TRY_AGAIN = "Please try again.";
+  
+  /**
+   * Background process to change wallpaper using picture in selected folder.
    */
   private static RandomFromFolder myFolderRun;
   
@@ -62,6 +71,9 @@ public class Controller implements PropertyChangeListener {
     // The controller is a listener for TimeList.
     MY_TIME.addListener(this);
     
+    // The controller is a listener for RandomFromNet.
+    myNetRun.addListener(this);
+    
     // Start GUI thread.
     EventQueue.invokeLater(new Runnable() {
 
@@ -73,7 +85,7 @@ public class Controller implements PropertyChangeListener {
       }
 
     });
-    
+//    myNetRun.getRegularPicture(); //for testing
   }
   
   /**
@@ -192,7 +204,7 @@ public class Controller implements PropertyChangeListener {
   @Override
   public void propertyChange(final PropertyChangeEvent evt) {
 
-    if (evt.getNewValue().equals(CodeChange.ADD_SUCCESS)) {
+    if (evt.getNewValue().equals(CodeTimeAction.ADD_SUCCESS)) {
       // Successfully add time to the list.
       
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Time list is succesfully updated.");
@@ -200,41 +212,50 @@ public class Controller implements PropertyChangeListener {
       // Update requirement status.
       NorthCheckListPanel.requirementSetter(21);
 
-    } else if (evt.getNewValue().equals(CodeChange.ADD_FAIL)) {
+    } else if (evt.getNewValue().equals(CodeTimeAction.ADD_FAIL)) {
       // Fail to add time to the list.
       
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST, 
           "Cannot add duplicate time! \n" + MY_TRY_AGAIN);
       
-    } else if (evt.getNewValue().equals(CodeTimeError.OUT_OF_RANGE)) {
+    } else if (evt.getNewValue().equals(CodeError.TIME_OUT_OF_RANGE)) {
       // Fail to add time to the list (time is out of range).
       
       RightTextPanel.textSetter(MY_TEXT_LOG, "Time is out of range! \n" + MY_TRY_AGAIN);
     
-    } else if (evt.getNewValue().equals(CodeTimeError.INVALID_CHAR)) {
+    } else if (evt.getNewValue().equals(CodeError.TIME_INVALID_CHAR)) {
       // Fail to add time to the list (invalid characters).
       
       RightTextPanel.textSetter(MY_TEXT_LOG, "Invalid character! \n" + MY_TRY_AGAIN);
       
-    } else if (evt.getNewValue().equals(CodeTimeError.INVALID_FORMAT)) {
+    } else if (evt.getNewValue().equals(CodeError.TIME_INVALID_FORMAT)) {
       // Fail to add time to the list (invalid format).
       RightTextPanel.textSetter(MY_TEXT_LOG,
           "Input should contains only \n" + "2 characters per field! \n" + MY_TRY_AGAIN);
       
-    } else if (evt.getNewValue().equals(CodeChange.DELETE_SUCCESS)) {
+    } else if (evt.getNewValue().equals(CodeTimeAction.DELETE_SUCCESS)) {
       // Successfully delete time from the list.
       
       RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Delete time successfully.");
       
-    } else if (evt.getNewValue().equals(CodeChange.DELETE_FAIL)) {
+    } else if (evt.getNewValue().equals(CodeTimeAction.DELETE_FAIL)) {
       // Fail to delete time from the list.
       
       RightTextPanel.textSetter(MY_TEXT_LOG, "Provided time is not in the list.");
       
-    } else if (evt.getNewValue().equals(CodeChange.EMPTY_TRUE)) {
+    } else if (evt.getNewValue().equals(CodeTimeAction.EMPTY_TRUE)) {
       // After empty the time list.
       
       NorthCheckListPanel.requirementSetter(20);
+      
+    } else if (evt.getNewValue().equals(CodeError.NET_NO_CONNECTION)) {
+      // Action when there is no Internet connection.
+      
+      RightTextPanel.textSetter(MY_TEXT_LOG, "No Internet Connection. \n" 
+          + MY_TRY_AGAIN);
+      
+      // Stop the process.
+      Controller.stopBackgroundNet();
       
     }
   }

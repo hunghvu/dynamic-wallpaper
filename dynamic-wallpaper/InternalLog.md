@@ -15,6 +15,8 @@ ___
 ## 2020/09/04
 - Multiple refactoring to view and model.
 - Preliminary comments for controller, PMD + Checkstyle for TimeList, enum classes, FileArray, JnaWallpaper.
+- Fix an unexpected behavior when user press Apply button multiple times, by introducing flag to "Apply" action.
+- Fix a wrong path to create temporary lock file. It should be in system "temp" folder.
 
 ## 2020/09/03
 - Display message panel when a user minimize the program.

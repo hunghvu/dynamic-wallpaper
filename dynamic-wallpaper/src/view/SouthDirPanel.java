@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.Timer;
@@ -18,7 +20,8 @@ import javax.swing.Timer;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({ "serial", "PMD.LawOfDemeter",  "PMD.NullAssignment" })
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter",  "PMD.NullAssignment",
+    "PMD.AssignmentToNonFinalStatic"})
 public class SouthDirPanel extends JPanel implements ActionListener {
 
   /**
@@ -61,6 +64,12 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    * This will be initialized after Apply is successfully pressed.
    */
   private Timer myUpdateTimer;
+  
+  /**
+   * This is running flag to prevent user pressing apply multiple times.
+   * True means a user can apply, false otherwise.
+   */
+  private static boolean myApplyFlag;
 
   /**
    * Constructor.
@@ -86,6 +95,9 @@ public class SouthDirPanel extends JPanel implements ActionListener {
     add(MY_DIR_BROWSE);
     add(MY_STOP);
     add(MY_APPLY);
+    
+    // Initialize apply flag.
+    myApplyFlag = true;
 
   }
 
@@ -168,9 +180,13 @@ public class SouthDirPanel extends JPanel implements ActionListener {
       myUpdateTimer.stop();
 
       if (NorthCheckListPanel.isInternetChosen()) {
+        
         controller.Controller.stopBackgroundNet();
+        
       } else {
+        
         controller.Controller.stopBackgroundFolder();
+        
       }
 
       // Display log.
@@ -183,6 +199,10 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
       // Display running status.
       MiddleSettingPanel.setRunStatus(false);
+      
+      // Allow user to apply after the program is stopped.
+      // Reset apply flag.
+      myApplyFlag = true;
 
     }
     
@@ -200,7 +220,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
       RightTextPanel.textSetter(MY_LOG_OPTION, "Some requirements are not yet completed! \n"
           + "Please complete all the requirements first then try again.");
 
-    } else {
+    } else if (myApplyFlag) {
 
       // Stop old instance of (GUI/revalidate/repaint update) timer before creating a
       // new one. Set to null to persuade GC.
@@ -227,7 +247,18 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
       // Display running state.
       MiddleSettingPanel.setRunStatus(true);
+      
+      // Not allow user to continuously press apply button.
+      myApplyFlag = false;
 
+    } else {
+      // Show a dialog to let user know 
+      // not to press "Apply" button multiple times in a row.
+      
+      final JFrame msgFrame = new JFrame();
+      JOptionPane.showMessageDialog(msgFrame, "The process is running right now. "
+          + "Please either changing the picture folder or press stop button first.");
+      
     }
   }
   
@@ -235,6 +266,10 @@ public class SouthDirPanel extends JPanel implements ActionListener {
    * This is the action performed when Browse button is chosen.
    */
   private void dirButtonAction() {
+    
+    // Allow user to apply again after changing folder directory.
+    // Reset apply flag.
+    myApplyFlag = true;
     
     // File chooser to select folder directory.
     final JFileChooser myChooser = new JFileChooser();
@@ -270,8 +305,9 @@ public class SouthDirPanel extends JPanel implements ActionListener {
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  // Ignore potential violation of Law of Demeter (LoD).
-  // Ignore null assignment.
+  // Ignore Potential violation of Law of Demeter (LoD).
+  // Ignore Null assignment.
+  // Ignore Assignment to non final static.
   
   // Fix Do not call GC explicitly.
   // Fix Excessive method length (by refactoring).

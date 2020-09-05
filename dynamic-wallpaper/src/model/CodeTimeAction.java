@@ -5,7 +5,7 @@ package model;
  * @author Hung Vu
  *
  */
-public enum CodeChange {
+public enum CodeTimeAction {
   
   ADD_SUCCESS, ADD_FAIL, DELETE_SUCCESS, DELETE_FAIL, CLEAR, EMPTY_TRUE, EMPTY_FALSE;
   
