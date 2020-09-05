@@ -184,7 +184,7 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
   }
 
-  //Temporary, as of 09/04/20:
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

@@ -9,7 +9,7 @@ import com.sun.jna.win32.StdCallLibrary;
  * @author Hung Vu
  *
  */
-public interface JnaWallpaper extends StdCallLibrary{
+public interface JnaWallpaper extends StdCallLibrary {
   /**
    * Field to load USER32 library. loadLibrary deprecated, use load instead
    */
@@ -39,3 +39,8 @@ public interface JnaWallpaper extends StdCallLibrary{
 
       );
 }
+
+// Temporary, as of 09/04/20:
+// Class: Done Recomment.
+// Class: Done Checkstyle.
+// Class: Done PMD.

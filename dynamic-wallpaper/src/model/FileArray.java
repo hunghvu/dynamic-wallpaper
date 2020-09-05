@@ -1,10 +1,7 @@
 package model;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.util.Arrays;
-
 
 /**
  * This class return an array of file (path) in given directory.
@@ -12,26 +9,23 @@ import java.util.Arrays;
  * @author Hung Vu
  *
  */
-@SuppressWarnings({"PMD.AssignmentToNonFinalStatic", "PMD.MethodReturnsInternalArray"})
+@SuppressWarnings({ "PMD.AssignmentToNonFinalStatic", "PMD.MethodReturnsInternalArray" })
 public class FileArray {
   /**
    * Array of file.
    */
   private static File[] myFileList;
-  
 
   /**
    * Constructor.
    *
    * @param theDir given folder directory
    */
-  public FileArray(final File theDir) {  
-    
+  public FileArray(final File theDir) {
+
     myFileList = theDir.listFiles();
-    
 
   }
-  
 
   /**
    * Return array of file path.
@@ -55,6 +49,7 @@ public class FileArray {
 
   }
 
+  // Temporary, as of 09/04/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

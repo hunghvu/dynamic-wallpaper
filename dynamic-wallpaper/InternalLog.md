@@ -14,7 +14,7 @@ ___
 
 ## 2020/09/04
 - Multiple refactoring to view and model.
-- Preliminary comments for controller, PMD + Checkstyle for TimeList.
+- Preliminary comments for controller, PMD + Checkstyle for TimeList, enum classes, FileArray, JnaWallpaper.
 
 ## 2020/09/03
 - Display message panel when a user minimize the program.
