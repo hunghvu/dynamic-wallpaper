@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -87,7 +87,9 @@ public class WindowFrame extends JFrame {
 
     // Check another running instance (02/09).
     if (isLocked()) {
-
+      
+      // Include dispose (09/05).
+      dispose();
       System.exit(0);
 
     } else {
@@ -104,6 +106,10 @@ public class WindowFrame extends JFrame {
       setSize(SIZE, SIZE);
       setVisible(true);
       setResizable(false);
+      //Not directly call system exit (09/05).
+      setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
       // Add listener (02/09)
       this.addWindowListener(new WindowAdapter() {
@@ -117,7 +123,6 @@ public class WindowFrame extends JFrame {
           // Remove redundant code, FileLock is automatically
           // released when JVM is terminated. (02/09)
           WindowFrame.lockFile.deleteOnExit();
-          System.exit(0);
 
         }
 
@@ -194,6 +199,8 @@ public class WindowFrame extends JFrame {
             // Remove redundant code, FileLock is automatically
             // released when JVM is terminated. (02/09)
             WindowFrame.lockFile.deleteOnExit();
+            // Add dispose. (09/05)
+            dispose();
             System.exit(0);
 
           }
@@ -362,7 +369,7 @@ public class WindowFrame extends JFrame {
   }
   
   
-  // Temporary, as of 09/04/20:
+  // Temporary, as of 09/05/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -191,12 +191,13 @@ public class SouthDirPanel extends JPanel implements ActionListener {
     // When timer are null.
     if (
         myUpdateTimer == null 
-        || controller.Controller.getFolderAutoState() == null 
-        && !controller.Controller.getNetRunState()
+        || !controller.Controller.isFolderRunning() 
+        && !controller.Controller.isNetRunning() 
+        // False means not running, but need "true" for the comparison.
         // Default order: Evaluate && first then ||
         // so no need for parentheses.  
         ) {
-
+      
       RightTextPanel.textSetter(MY_LOG_OPTION, "Program is currently not running!");
 
     } else {
@@ -331,7 +332,7 @@ public class SouthDirPanel extends JPanel implements ActionListener {
     
   }
   
-  // Temporary, as of 09/04/20:
+  // Temporary, as of 09/05/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

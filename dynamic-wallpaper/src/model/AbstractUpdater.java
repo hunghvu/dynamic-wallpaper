@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -72,9 +72,14 @@ public abstract class AbstractUpdater {
   protected static int myRecentMinute = -1;
   
   /**
-   * Auto update wallpaper (process).
-   * @param theSignal signal to set state for the process. <br>
-   *                  true means running, false otherwise.
+   * Auto update preview panel based on given timestamp 
+   * and change desktop wallpaper.
+   * 
+   * @param theSignal indicate whether a program can be run or not (new thread)
+   *                  <br>
+   *                  true creates an instance of thread, run program based on
+   *                  timer <br>
+   *                  false cancel current timer (stop thread).
    */
   public abstract void autoUpdate(boolean theSignal);
 
@@ -119,7 +124,7 @@ public abstract class AbstractUpdater {
   
   }
   
-  // Temporary, as of 09/04/20:
+  // Temporary, as of 09/05/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

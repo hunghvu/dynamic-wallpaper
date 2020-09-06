@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 package model;
 
 /**
- * Return error code in validating given "time".
+ * Return error code in validating given timestamp.
  * This is used to trigger proper listener action.
  * @author Hung Huu Vu
  *
@@ -37,7 +37,7 @@ public enum CodeError {
 
 }
 
-// Temporary, as of 09/04/20:
+// Temporary, as of 09/05/20:
 // Class: Done Recomment.
 // Class: Done Checkstyle.
 // Class: Done PMD.

@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -276,7 +276,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   }
 
-  // Temporary, as of 09/04/20:
+  // Temporary, as of 09/05/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

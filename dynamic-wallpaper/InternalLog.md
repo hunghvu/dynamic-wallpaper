@@ -12,6 +12,12 @@
 - The first (final) release.
 ___
 
+## 2020/09/05
+- Large scale refactoring in Controller, RandomFromNet, RandomFromFolder and minor refactoring in other classes.
+- Basically everything is completed. Still, one more additional day is needed to test user experience (real-use).
+- This can be seen as RC1.
+- Perhaps, version tag should be change from 1.0.0.x to 1.0.y.z (y is "large" version, z indicates whether JDK is included).
+
 ## 2020/09/04
 - Multiple refactoring to view and model.
 - Preliminary comments for controller, PMD + Checkstyle for TimeList, enum classes, FileArray, JnaWallpaper.
@@ -19,6 +25,7 @@ ___
 - Fix a wrong path to create temporary lock file. It should be in system "temp" folder.
 - Successfully cache the image on local system.
 - Basically complete implementation of the new feature. Use image from the Internet to set as wallpaper. However, still need to test and refactoring.
+- Add copyright notice to each file.
 
 ## 2020/09/03
 - Display message panel when a user minimize the program.

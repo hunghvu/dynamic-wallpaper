@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -24,16 +24,14 @@ import controller.Controller;
 /**
  * The main class to run a program.
  * This program will changes desktop wallpaper
- * based on the time set.
+ * based given timestamp.
  * @author Hung Huu Vu
  *
  */
-@SuppressWarnings({ "PMD.DoNotCallSystemExit", "PMD.ExcessiveMethodLength",
-    "PMD.LawOfDemeter", "PMD.ModifiedCyclomaticComplexity",
-    "PMD.SystemPrintln", "PMD.UseUtilityClass", "PMD.DataflowAnomalyAnalysis",
-    "PMD.CloseResource", "PMD.CommentSize" })
+@SuppressWarnings({ "PMD.CommentSize", "PMD.UseUtilityClass",
+    "PMD.DataflowAnomalyAnalysis" })
 //Ignore comment size (GPL copyright notice).
-public class MainProgram {
+public class MainLauncher {
   
   /**
    * Method to run dynamic wallpaper program.
@@ -41,18 +39,20 @@ public class MainProgram {
    */
   public static void main(final String[] theArgs) {
     
-    
-    
-    //Initialize frame for program.
-//    final WindowFrame frame = new WindowFrame();
-    final Controller test = new Controller();
-
-    
-
+    // Ignore Checkstyle warnings.
+    final Controller appController = new Controller();
 
   }
 
   
-  //Update 6/14 Attempt to create file lock. Done.
+  // Temporary, as of 09/05/20:
+  // Class: Done Comment.
+  // Class: Done Checkstyle.
+  // Class: Done PMD.
+  
+  // Ignore Use utility class.
+  // Ignore Data flow anomaly analysis.
+  
+  // Ignore Checkstyle warnings.
 
 }

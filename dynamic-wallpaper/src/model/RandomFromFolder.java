@@ -1,5 +1,5 @@
 /*
- * This program (Dynamic Wallpaper) changes desktop background based on provided time by a user.
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
  * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -33,10 +33,10 @@ import view.RightTextPanel;
  * @author Hung Huu Vu
  *
  */
-@SuppressWarnings({ "PMD.LawOfDemeter", "PMD.AssignmentToNonFinalStatic", 
-    "PMD.CommentSize", "PMD.DataflowAnomalyAnalysis", "PMD.UnusedAssignment",
-    "PMD.DoNotCallGarbageCollectionExplicitly", "PMD.NullAssignment",
-    "PMD.CommentSize" })
+@SuppressWarnings({ "PMD.LawOfDemeter", "PMD.AssignmentToNonFinalStatic", "PMD.CommentSize",
+    "PMD.DataflowAnomalyAnalysis", "PMD.UnusedAssignment",
+    "PMD.DoNotCallGarbageCollectionExplicitly", "PMD.NullAssignment", 
+    "PMD.ExcessiveMethodLength"})
 //Ignore comment size (GPL copyright notice).
 public class RandomFromFolder extends AbstractUpdater {
 
@@ -51,34 +51,40 @@ public class RandomFromFolder extends AbstractUpdater {
   private static File myPicturePath;
 
   /**
+   * Indicate whether the process is running.
+   */
+  private static boolean myRunFlag;
+
+  /**
    * Constructor.
    * 
    * @param theFileArray picture folder path
    */
   public RandomFromFolder(final FileArray theFileArray) {
-    
+
     super();
     myFileArray = theFileArray;
     autoUpdate(MY_RUN_SIGNAL);
 
   }
 
-
   /**
-   * Auto update preview panel based on given time (add change desktop wallpaper
-   * later).
+   * Get running state.
    * 
-   * @param theSignal indicate whether a program can be run or not (new thread)
-   *                  <br>
-   *                  true creates an instance of thread, run program based on
-   *                  timer <br>
-   *                  false cancel current timer (stop thread).
+   * @return true if the process is running, false otherwise.
    */
+  public static boolean isRunning() {
+    return myRunFlag;
+  }
+
   @Override
   public void autoUpdate(final boolean theSignal) {
 
     // Run if theSignal is true, else cancel old thread.
     if (theSignal) {
+
+      // Set run flag.
+      myRunFlag = true;
 
       // Temporary variable to randomize picture.
       final Random randPicture = new Random();
@@ -138,7 +144,6 @@ public class RandomFromFolder extends AbstractUpdater {
             myPicturePath = myFileArray
                 .getFileArray()[randPicture.nextInt(myFileArray.getFileArray().length)];
 
-
             // Display picture in the preview panel.
             MiddleSettingPanel.displayPreview(myPicturePath);
 
@@ -158,10 +163,13 @@ public class RandomFromFolder extends AbstractUpdater {
         }
         // End of timer task.
       }, MY_UNUSED, MY_INTERVAL);
-      
+
       // End of schedule.
 
     } else {
+
+      // Set run flag.
+      myRunFlag = false;
 
       // Cancel the old thread before starting a new one.
       myAutoRun.cancel();
@@ -172,19 +180,20 @@ public class RandomFromFolder extends AbstractUpdater {
     }
 
   }
-  
-  // Temporary, as of 09/04/20:
+
+  // Temporary, as of 09/05/20:
   // Class: Done Comment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  
+
   // Ignore LoD.
-  // Ignore Assignment to non final static. (Object is initialized only once)
+  // Ignore Assignment to non final static.
   // Ignore Comment size.
   // Ignore DataflowAnomalyAnalysis (contain = false in compareTime).
   // Ignore Unused assignment.
   // Ignore Do not call GC explicitly.
   // Ignore Null assignment.
-  
+  // Ignore ExcessiveMethodLength.
+
   // Fix Redundant field initializer.
 }
