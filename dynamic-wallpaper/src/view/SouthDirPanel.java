@@ -209,13 +209,17 @@ public class SouthDirPanel extends JPanel implements ActionListener {
       if (NorthCheckListPanel.isInternetChosen()) {
         
         controller.Controller.stopBackgroundNet();
+
         
       } else {
         
         controller.Controller.stopBackgroundFolder();
         
       }
-
+      
+      // Lock the check box so a thread can be stopped properly. (09/07)
+      NorthCheckListPanel.setCheckboxUsability(true);
+      
       // Display log.
       RightTextPanel.textSetter(
           
@@ -267,6 +271,9 @@ public class SouthDirPanel extends JPanel implements ActionListener {
         controller.Controller.createFileArray(myFolderDir);
         controller.Controller.startBackgroundFolder();
         
+        // Lock the check box so a thread can be stopped properly. (09/07)
+        NorthCheckListPanel.setCheckboxUsability(false);
+        
       }
 
       // Timer for automatic repaint/revalidate.
@@ -274,7 +281,8 @@ public class SouthDirPanel extends JPanel implements ActionListener {
       myUpdateTimer.start();
 
       // Print message after apply button is pressed.
-      RightTextPanel.textSetter(MY_LOG_OPTION, "Apply completed.");
+      RightTextPanel.textSetter(MY_LOG_OPTION, "Apply completed. \n"
+          + "Press Stop button to un-grey-out the checkbox.");
 
       // Display running state.
       MiddleSettingPanel.setRunStatus(true);

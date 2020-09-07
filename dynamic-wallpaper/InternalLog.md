@@ -13,6 +13,7 @@
 ___
 
 ## 2020/09/07
+- Fix the issue where threads may not be stopped properly due to the state (isSelected) of the check box.
 - Update comments, complete the update. Ready to be released.
 - Next plan:
     - Implement save/import/export config function.

@@ -134,7 +134,11 @@ public class NorthCheckListPanel extends JPanel {
           SouthDirPanel.getBrowseButton().setEnabled(false);
           SouthDirPanel.getTextArea()
               .setText("You are using image from the Internet. "
-                  + "There is no need to select local picture folder.");
+                  + "There is no need to select local picture folder. \n"
+                  + "Please press Stop button to un-grey-out the checkbox.");
+          
+          //
+          MY_REQ_1_NET.setEnabled(false);
 
         } else {
 
@@ -156,6 +160,14 @@ public class NorthCheckListPanel extends JPanel {
    */
   public static boolean isInternetChosen() {
     return MY_REQ_1_NET.isSelected();
+  }
+  
+  /**
+   * Set usability of the (net) check box.
+   * @param theSignal true mean the check box is usable, false grey out the check box.
+   */
+  public static void setCheckboxUsability(final boolean theSignal) {
+    MY_REQ_1_NET.setEnabled(theSignal);
   }
 
   /**
