@@ -277,7 +277,7 @@ public class RandomFromNet extends AbstractUpdater {
 
   }
   
-  // Temporary, as of 09/05/20:
+  // Done, as of 09/07/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.

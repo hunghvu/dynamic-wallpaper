@@ -12,6 +12,14 @@
 - The first (final) release.
 ___
 
+## 2020/09/07
+- Update comments, complete the update. Ready to be released.
+- Next plan:
+    - Implement save/import/export config function.
+    - Implement auto generate timestamp.
+    - Different API call option.
+    - Auto start with OS (optional).
+
 ## 2020/09/05
 - Large scale refactoring in Controller, RandomFromNet, RandomFromFolder and minor refactoring in other classes.
 - Basically everything is completed. Still, one more additional day is needed to test user experience (real-use).
