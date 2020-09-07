@@ -4,6 +4,7 @@
 /**/.pmd
 /**/.checkstyle
 /**/.settings
+/**/.eclipse-pmd
 
 # Binary files
 /**/bin/

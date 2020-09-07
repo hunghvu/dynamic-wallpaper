@@ -17,64 +17,42 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package model;
+package main;
 
-import java.io.File;
-import java.util.Arrays;
+import controller.Controller;
 
 /**
- * This class return an array of file (path) in given directory.
- *
+ * The main class to run a program.
+ * This program will changes desktop wallpaper
+ * based given timestamp.
  * @author Hung Huu Vu
  *
  */
-@SuppressWarnings({ "PMD.AssignmentToNonFinalStatic", "PMD.MethodReturnsInternalArray",
-    "PMD.CommentSize" })
+@SuppressWarnings({ "PMD.CommentSize", "PMD.UseUtilityClass",
+    "PMD.DataflowAnomalyAnalysis" })
 //Ignore comment size (GPL copyright notice).
-public class FileArray {
+public class MainLauncher {
+  
   /**
-   * Array of file.
+   * Method to run dynamic wallpaper program.
+   * @param theArgs argument to run the program.
    */
-  private static File[] myFileList;
-
-  /**
-   * Constructor.
-   *
-   * @param theDir given folder directory
-   */
-  public FileArray(final File theDir) {
-
-    myFileList = theDir.listFiles();
+  public static void main(final String[] theArgs) {
+    
+    // Ignore Checkstyle warnings.
+    final Controller appController = new Controller();
 
   }
 
-  /**
-   * Return array of file path.
-   *
-   * @return array of file path.
-   */
-  public File[] getFileArray() {
-
-    return myFileList;
-
-  }
-
-  /**
-   * String representation of FileArray. <br>
-   * Only use for internal checking purpose.
-   */
-  @Override
-  public String toString() {
-
-    return Arrays.toString(myFileList);
-
-  }
-
+  
   // Done, as of 09/07/20:
-  // Class: Done Recomment.
+  // Class: Done Comment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  // Ignore MethodsReturnInternalArray.
-  // Ignore Assignment to non final static.
+  
+  // Ignore Use utility class.
+  // Ignore Data flow anomaly analysis.
+  
+  // Ignore Checkstyle warnings.
 
 }

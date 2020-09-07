@@ -1,3 +1,22 @@
+/*
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
+ * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 package view;
 
 import java.awt.event.ActionEvent;
@@ -11,13 +30,14 @@ import javax.swing.JTextArea;
 import model.TimeList;
 
 /**
- * This class creates right/text panel, <br> 
+ * This class creates right/text panel, <br>
  * to display information (log and time list).
  * 
- * @author Hung Vu
+ * @author Hung Huu Vu
  *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.CommentSize"  })
+//Ignore comment size (GPL copyright notice).
 public class RightTextPanel extends JPanel implements ActionListener {
 
   /**
@@ -81,12 +101,12 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * TIME LIST area label.
    */
   private static final JLabel MY_TIME_LABEL = new JLabel("TIME LIST:");
-  
+
   /**
    * Parameter to print message to text log.
    */
   private static final String MY_LOG_TEXT = "LOG";
-  
+
   /**
    * Parameter to print message to Time List.
    */
@@ -96,9 +116,10 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public RightTextPanel() {
-    //Call super.
-    super();
     
+    // Call super.
+    super();
+
     // Panel properties.
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -141,14 +162,14 @@ public class RightTextPanel extends JPanel implements ActionListener {
       MY_TEXT_LOG.append(theMsg + "\n \n");
       MY_TEXT_TIME_LIST.setText(String.join("\n \n", TimeList.getTimeList()));
 
-    } 
-    
-    //No need in final release.
-    //    else { // For internal use only, to check when wrong parameter is passed.
+    }
+
+    // No need in final release.
+    // else { // For internal use only, to check when wrong parameter is passed.
     //
-    //      System.out.println("Wrong option, please check parameter again.");
+    // System.out.println("Wrong option, please check parameter again.");
     //
-    //    }
+    // }
   }
 
   /**
@@ -166,17 +187,15 @@ public class RightTextPanel extends JPanel implements ActionListener {
       // Clear time list (display message + data storage) when
       // button is pressed.
 
-      // Reset time list data.
-      MiddleSettingPanel.resetTimeList();
+      // Reset time list data. (02/09)
+      controller.Controller.resetTimeList();
 
       // Change requirement checklist.
       NorthCheckListPanel.requirementSetter(20);
-      
+
       // Display log.
-      MY_TEXT_LOG.append("Clear time list successfully! \n" 
-          + "If the program is still running, \n" 
-          + "please add new time to the list, \n"
-          + "or stop the program. \n \n");
+      MY_TEXT_LOG.append("Clear time list successfully! \n" + "If the program is still running, \n"
+          + "please add new time to the list, \n" + "or stop the program. \n \n");
 
       // Reset time list display/message.
       MY_TEXT_TIME_LIST.setText("");
@@ -185,8 +204,11 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
   }
 
+  // Done, as of 09/07/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
+  
+  // Ignore LoD
 
 }

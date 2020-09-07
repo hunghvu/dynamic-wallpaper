@@ -1,3 +1,22 @@
+/*
+ * This program (Dynamic Wallpaper) changes desktop background based on provided timestamp.
+ * Copyright (C) 2020  Hung Huu Vu <hunghvu2017@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
+
 package view;
 
 import java.awt.BorderLayout;
@@ -11,25 +30,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import model.TimeList;
 
 /**
  * This class creates a middle panel to preview image, receives users input to
  * create time list, and create proper message to display.
- * 
- * @author Hung Vu
+ *
+ * @author Hung Huu Vu
  *
  */
-@SuppressWarnings({"serial", "PMD.ModifiedCyclomaticComplexity", 
-    "PMD.StdCyclomaticComplexity", "PMD.LawOfDemeter", "PMD.CyclomaticComplexity",
-    "PMD.ExcessiveMethodLength", "PMD.AvoidDuplicateLiterals", "PMD.NullAssignment",
-    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly"})
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.NullAssignment", 
+    "PMD.DataflowAnomalyAnalysis", "PMD.DoNotCallGarbageCollectionExplicitly", 
+    "PMD.UnusedAssignment", "PMD.CommentSize"  })
+//Ignore comment size (GPL copyright notice).
 public class MiddleSettingPanel extends JPanel implements ActionListener {
 
-  /**
-   * Store list of given time.
-   */
-  private static final TimeList MY_TIME_LIST = new TimeList();
+  // Remove time list (02/09)
 
   /**
    * Save the time to change wallpaper.
@@ -60,11 +75,11 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    * Label to indicate purpose of middle region.
    */
   private static final JLabel MY_PREVIEW_LABEL = new JLabel(
-      
+
       "Next Wallpaper Preview", JLabel.CENTER
-      
-      );
-  
+
+  );
+
   /**
    * Label to indicate status of the program.
    */
@@ -79,21 +94,11 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
    * Width of previewed image.
    */
   private static final int MY_RESIZE_W = 770;
-  
+
   /**
    * Preview height.
    */
   private static final int MY_RESIZE_H = 435;
-  
-  /**
-   * Parameter to print message to text log.
-   */
-  private static final String MY_TEXT_LOG = "LOG";
-  
-  /**
-   * Parameter to print message to Time List.
-   */
-  private static final String MY_TEXT_TIME_LIST = "TIME_LIST";
 
   /**
    * Image for the preview panel. This will contain image after resized.
@@ -106,22 +111,13 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
   private static JLabel myImageLabel;
 
   /**
-   * Value of hour.
-   */
-  private static int myHourValue;
-
-  /**
-   * Value of minute.
-   */
-  private static int myMinuteValue;
-
-  /**
    * Constructor.
    */
   public MiddleSettingPanel() {
+    
     // Call super.
     super();
-    
+
     // Properties of panel.
     setLayout(new BorderLayout());
 
@@ -132,7 +128,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     MY_HOUR.setPreferredSize(new Dimension(20, 20));
     MY_MINUTE.setPreferredSize(new Dimension(20, 20));
     MY_PREVIEW_LABEL.setPreferredSize(new Dimension(120, 120));
-    MY_STATUS_LABEL.setPreferredSize(new Dimension(120, 20)); //Actual min height: 9, width 111
+    MY_STATUS_LABEL.setPreferredSize(new Dimension(120, 20)); // Actual min height: 9, width 111
 
     // Create sub-panel for South region of this panel. BorderLayout only allow 1
     // component per region.
@@ -151,11 +147,12 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
     add(MY_PREVIEW_LABEL, BorderLayout.NORTH);
     add(MY_PREVIEW_PANEL, BorderLayout.CENTER);
     add(subSouth, BorderLayout.SOUTH);
+    
   }
 
   /**
    * This method provide the input in hour text field.
-   * 
+   *
    * @return hour in text field
    */
   public static String getMyHourText() {
@@ -166,7 +163,7 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
   /**
    * This method provide the input in minute text field.
-   * 
+   *
    * @return minute in text field
    */
   public static String getMyMinuteText() {
@@ -176,30 +173,23 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
   }
 
   /**
-   * Reset time list.
-   */
-  public static void resetTimeList() {
-
-    MY_TIME_LIST.clearTimeList();
-
-  }
-  
-  /**
    * Display the status of program.
+   * 
    * @param theStatus Indicates whether the program is running. <br>
-   True is running <br>
-   false otherwise.
+   *                  True is running <br>
+   *                  false otherwise.
    */
   public static void setRunStatus(final boolean theStatus) {
     if (theStatus) {
-      
+
       MY_STATUS_LABEL.setText("Status: Running");
-      
+
     } else {
-      
+
       MY_STATUS_LABEL.setText("Status: Not Running");
-      
+
     }
+    
   }
 
   /**
@@ -209,21 +199,20 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     // Remove old image to add the new one.
     MY_PREVIEW_PANEL.removeAll();
-    
+
     // Get original image icon.
     ImageIcon originalIcon = new ImageIcon(thePath.toString());
-    
-    //Get original image.
+
+    // Get original image.
     Image originalImage = originalIcon.getImage();
 
-    //Image to resize
+    // Image to resize
     Image resized = originalImage.getScaledInstance(
-        
-        MY_RESIZE_W, //776 fit left margin 774 fit right margin
-        MY_RESIZE_H,
-        Image.SCALE_DEFAULT
-        
-        );    
+
+        MY_RESIZE_W, // 776 fit left margin 774 fit right margin
+        MY_RESIZE_H, Image.SCALE_DEFAULT
+
+    );
 
     // Previewed image after resized.
     myWallpaperImage = new ImageIcon(resized);
@@ -233,20 +222,20 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     // Add label (image) to the panel.
     MY_PREVIEW_PANEL.add(myImageLabel);
-    
-    //Destroy image in memory. To prevent memory leak from them.
+
+    // Destroy image in memory. To prevent memory leak from them.
     originalImage.flush();
     resized.flush();
-    
-    //Set to null to persuade garbage collection.
-    //Not reliable, only to limit the possibility of memory leak.
+
+    // Set to null to persuade garbage collection.
+    // Not reliable, only to limit the possibility of memory leak.
     originalIcon = null;
     originalImage = null;
     resized = null;
     myWallpaperImage = null;
     myImageLabel = null;
-    
-    //Collect heap garbage.
+
+    // Collect heap garbage.
     System.gc();
 
   }
@@ -259,115 +248,47 @@ public class MiddleSettingPanel extends JPanel implements ActionListener {
 
     if (theE.getSource() == MY_SAVE_TIME) {
 
-      // See if string is in ## format (length == 2).
-      if (getMyHourText().length() == 2 && getMyMinuteText().length() == 2) {
-
-        try {
-
-          // Turn hour and minute from string to int. If fail then throws exception.
-          myHourValue = Integer.parseInt(getMyHourText());
-          myMinuteValue = Integer.parseInt(getMyMinuteText());
-
-          // Hour (00-23), minute (00-59).
-          if (myHourValue >= 0 && myHourValue <= 23 && myMinuteValue >= 0 && myMinuteValue <= 59) {
-
-            // Build list of time.
-            final boolean addResult = MY_TIME_LIST.addTime(
-                
-                getMyHourText() + ":" + getMyMinuteText()
-                
-                );
-
-            // Display message.
-            if (addResult) { // Add to time list: Success - true.
-
-              RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Time list is succesfully updated.");
-
-              // Update requirement status.
-              NorthCheckListPanel.requirementSetter(21);
-
-            } else { // Add to time list: Fail.
-
-              RightTextPanel.textSetter(
-                  
-                  MY_TEXT_TIME_LIST, 
-                  "Cannot add duplicate time! \n"
-                  + "Please try again.");
-
-            }
-
-          } else { // Time is out of range.
-
-            RightTextPanel.textSetter(MY_TEXT_LOG, "Time is out of range! \n"
-                + "Please try again.");
-
-          }
-
-        } catch (NumberFormatException e) {          
-          // Throw exception when string can't be parsed. 
-          // Invalid input format.
-          
-          RightTextPanel.textSetter(MY_TEXT_LOG, "Invalid character! \n"
-              + "Please try again.");
-
-        }
-
-      } else { // Invalid input format: length != 2.
-
-        RightTextPanel.textSetter(MY_TEXT_LOG, "Input should contains only \n"
-            + "2 characters per field! \n"
-            + "Please try again.");
-
-      }
+      controller.Controller.setTime(getMyHourText(), getMyMinuteText());
 
       // Reset input fields after button is pressed.
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
+
+      //////////////////////////////////
 
     } else if (theE.getSource() == MY_CLEAR_TIME) { // Clear input fields.
 
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
 
-    } else if (theE.getSource() == MY_DELETE_TIME) {      
+    } else if (theE.getSource() == MY_DELETE_TIME) {
+      
       // Delete time (from string time list)
       // and update message.
-      
-      if (MY_TIME_LIST.deleteTime(getMyHourText() + ":" + getMyMinuteText())) {        
-        // Delete: success - true.
-        
-        RightTextPanel.textSetter(MY_TEXT_TIME_LIST, "Delete time successfully.");
-
-      } else {       
-        // Delete: Fail.
-        
-        RightTextPanel.textSetter(MY_TEXT_LOG, "Provided time is not in the list.");
-
-      }
-
-      // Check if list is empty to update requirement checker (north panel).
-      if (MY_TIME_LIST.isEmpty()) {
-
-        NorthCheckListPanel.requirementSetter(20);
-
-      }
+      controller.Controller.deleteTime(getMyHourText(), getMyMinuteText());
+      controller.Controller.emptyTime();
 
       // Reset text field after button is pressed
       MY_HOUR.setText("");
       MY_MINUTE.setText("");
+      
     }
 
   }
 
+  // Done, as of 09/07/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  // Ignore Cyclomatic-complexity-type error.
   // Ignore Law of Demeter (LoD) potential violation.
-  // Ignore Excessive Method length (action performed).
-  // Ignore Avoid duplicate literal ("Please try again." 4 times).
+  // Ignore Null assignment.
   // Ignore Data flow anomaly (set variables to null).
-  // Ignore null assignment.
-  // Ignore do not call gc explicitly.
-
+  // Ignore Do not call GC explicitly.
+  // Ignore Unused assignment.
+  
+  // Fix Cyclomatic complexity (all types).
+  // Fix Excessive method length (by the introduce of controller).
+  // Fix Avoid duplicate literals.
+  
+  
 }
