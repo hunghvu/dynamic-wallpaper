@@ -1,16 +1,25 @@
 # Internal development log
-### [1.0.0.2] - 06-17-2020
+
+## [1.0.1.1] - 09-07-2020
+- Know bug(s):
+    - The program must be in running state before being stopped to un-grey-out the check box.
+    - The Apply button doesn't grey out the check box when the box option is chosen.
+        - Step to reproduce: Choose the box -> set time -> apply -> stop -> apply again. This can cause problems since it affects the functionality of Stop button, which results in threads not being stopped properly.
+
+
+## [1.0.0.2] - 06-17-2020
 - Contains only an executable (.exe) file.
 - Compared to **v1.0.0.1**, there is no change in the source code.
 - Change JDK link to default folder: C:\Program Files\Java
 
-### [1.0.0.1] - 06-17-2020
+## [1.0.0.1] - 06-17-2020
 - Packaged version, JDK 14.0.1 is included to improve portability.
 - Change JDK link to relative path.
 
 ## [1.0.0.0] - 2020-06-16
 - The first (final) release.
 ___
+
 
 ## 2020/09/07
 - Fix the issue where threads may not be stopped properly due to the state (isSelected) of the check box.
@@ -20,6 +29,8 @@ ___
     - Implement auto generate timestamp.
     - Different API call option.
     - Auto start with OS (optional).
+    - Change to specific background at a specific time.
+    - Live background (maybe too overwhelming).
 
 ## 2020/09/05
 - Large scale refactoring in Controller, RandomFromNet, RandomFromFolder and minor refactoring in other classes.
