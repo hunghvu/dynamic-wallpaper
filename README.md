@@ -1,5 +1,5 @@
 #   [Dynamic Wallpaper](https://github.com/hunghvu/dynamic-wallpaper)
-
+![GitHub All Releases](https://img.shields.io/github/downloads/hunghvu/dynamic-wallpaper/total?label=Total%20downloads&style=for-the-badge)
 ##  Description
 -   A small program, written in Java, allows users to automatically change their desktop wallpaper at a specific time in the day.
 -   Users can either choose their picture folder or choosing an option to get an image from Internet, then the program will **randomly** choose one image and set it as wallpaper.
@@ -26,7 +26,7 @@ The images are taken from [Lorem Picsum](https://picsum.photos/).
 -   This program has been tested only on Windows 10, it should run properly on this platform.
 
 ##  Execution process
--   Download the archive/zip file [here]((https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.1).
+-   Download the archive/zip file [here](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.1).
 -   Extract the archive/zip file.
 -   Go inside the extracted folder, run DynamicWallpaper.exe (done).
 
