@@ -21,18 +21,26 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import model.TimeList;
 
 /**
  * This class creates right/text panel, <br>
  * to display information (log and time list).
- * 
+ *
  * @author Hung Huu Vu
  *
  */
@@ -81,6 +89,16 @@ public class RightTextPanel extends JPanel implements ActionListener {
   private static final JButton MY_X_TIME_BUTTON = new JButton("Clear TIME LIST");
 
   /**
+   * Button to export TIME LIST.
+   */
+  private static final JButton MY_EXPORT_BUTTON = new JButton("Export TIME LIST"); // 09/14
+
+  /**
+   * Button to export TIME LIST.
+   */
+  private static final JButton MY_IMPORT_BUTTON = new JButton("Import TIME LIST"); // 09/14
+
+  /**
    * Sub panel for clear log button. Aesthetic purpose (avoiding layout component
    * resize).
    */
@@ -91,6 +109,18 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * component resize).
    */
   private static final JPanel MY_X_TIME_PANEL = new JPanel();
+
+  /**
+   * Sub panel for export button. Aesthetic purpose (avoiding layout
+   * component resize).
+   */
+  private static final JPanel MY_EXPORT_PANEL = new JPanel(); // 09/14
+
+  /**
+   * Sub panel for import button. Aesthetic purpose (avoiding layout
+   * component resize).
+   */
+  private static final JPanel MY_IMPORT_PANEL = new JPanel(); // 09/14
 
   /**
    * LOG area label.
@@ -113,10 +143,15 @@ public class RightTextPanel extends JPanel implements ActionListener {
   private static final String MY_TIME_LIST_TEXT = "TIME_LIST";
 
   /**
+   * Cache the previous path for file chooser, both export and import buttons.
+   */
+  private static File myCachedDir = null;
+
+  /**
    * Constructor.
    */
   public RightTextPanel() {
-    
+
     // Call super.
     super();
 
@@ -128,8 +163,12 @@ public class RightTextPanel extends JPanel implements ActionListener {
     MY_TEXT_TIME_LIST.setEditable(false);
     MY_X_LOG_BUTTON.addActionListener(this);
     MY_X_TIME_BUTTON.addActionListener(this);
+    MY_EXPORT_BUTTON.addActionListener(this); // 09/14
+    MY_IMPORT_BUTTON.addActionListener(this); // 09/14
     MY_X_LOG_PANEL.add(MY_X_LOG_BUTTON);
     MY_X_TIME_PANEL.add(MY_X_TIME_BUTTON);
+    MY_EXPORT_PANEL.add(MY_EXPORT_BUTTON); // 09/14
+    MY_IMPORT_PANEL.add(MY_IMPORT_BUTTON); // 09/14
     // Center aligned labels.
     MY_LOG_LABEL.setAlignmentX(CENTER_ALIGNMENT);
     MY_TIME_LABEL.setAlignmentX(CENTER_ALIGNMENT);
@@ -140,13 +179,15 @@ public class RightTextPanel extends JPanel implements ActionListener {
     add(MY_X_LOG_PANEL);
     add(MY_TIME_LABEL);
     add(SCROLL_TIME_LIST);
+    add(MY_EXPORT_PANEL);// 09/14
+    add(MY_IMPORT_PANEL);// 09/14
     add(MY_X_TIME_PANEL);
 
   }
 
   /**
    * Text setter for text (message) area.
-   * 
+   *
    * @param theIndicator Indicate which text area is going to be changed: <br>
    *                     LOG for MY_TEXT_LOG (LOG message)<br>
    *                     TIME_LIST for MY_TEXT_TIME_LIST (TIME LIST message)
@@ -200,6 +241,55 @@ public class RightTextPanel extends JPanel implements ActionListener {
       // Reset time list display/message.
       MY_TEXT_TIME_LIST.setText("");
 
+    } else if (theE.getSource() == MY_EXPORT_BUTTON) {
+
+      exportButtonAction();
+
+    }
+
+  }
+
+  /**
+   * Action for export button. 09/14
+   */
+  private void exportButtonAction() {
+
+    final JFileChooser chooser = new JFileChooser();
+
+    // Only display txt files.
+    final FileNameExtensionFilter filter = new FileNameExtensionFilter("*.txt", "txt");
+    chooser.setFileFilter(filter);
+
+    if (myCachedDir != null) {
+      chooser.setCurrentDirectory(myCachedDir);
+    }
+
+    final int chosenOption = chooser.showOpenDialog(this);
+
+    // Holder of file path.
+    File savedFile = null;
+
+    if (chosenOption == JFileChooser.APPROVE_OPTION) {
+
+      // Open previous choosen path.
+      savedFile = chooser.getSelectedFile().getAbsoluteFile();
+
+      // Cache path.
+      myCachedDir = savedFile.getParentFile();
+
+      try {
+
+        // Save config to a file
+        PrintWriter writer = new PrintWriter(savedFile);
+        writer.println(MY_TEXT_TIME_LIST.getText());
+        writer.close();
+
+      } catch (FileNotFoundException e) {
+
+        System.out.println("Exception in RightTextPanel export writer.");
+
+      }
+
     }
 
   }
@@ -208,7 +298,7 @@ public class RightTextPanel extends JPanel implements ActionListener {
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  
+
   // Ignore LoD
 
 }

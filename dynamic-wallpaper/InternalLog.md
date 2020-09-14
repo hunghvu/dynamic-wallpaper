@@ -20,6 +20,13 @@
 - The first (final) release.
 ___
 
+## 2020/09/14
+- Change look and feel
+- Add import/export config buttons.
+- Plan:
+    -   Vi UI.
+    -   Multi screen support.
+___
 
 ## 2020/09/07
 - Fix the issue where threads may not be stopped properly due to the state (isSelected) of the check box.
