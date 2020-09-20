@@ -1,5 +1,6 @@
-#   [Dynamic Wallpaper](https://github.com/hunghvu/dynamic-wallpaper)
+#   [Dynamic Wallpaper](https://hunghvu.github.io/dynamic-wallpaper/)
 ![GitHub All Releases](https://img.shields.io/github/downloads/hunghvu/dynamic-wallpaper/total?label=Total%20downloads&style=for-the-badge)
+
 ##  Description
 -   A small program, written in Java, allows users to automatically change their desktop wallpaper at a specific time in the day.
 -   Users can either choose their picture folder or choosing an option to get an image from Internet, then the program will **randomly** choose one image and set it as wallpaper.
@@ -7,7 +8,13 @@
 -   This is only a personal/student (out-of-class) project that I do in my spare time. It is a DIY way for me to practice the concept that I've learned about, well, and it's FUN! Feel free to take a look over the code. I hope it can be helpful for you!
 
 ##  Latest version
-- **[1.0.1.1](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.1) - 09/07/2020**
+- **[1.0.1.2](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.2) - 09/19/2020**
+
+## Features
+-   As of version [1.0.1.2](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.2):
+    -   The timestamp is based on 24-hour military time.
+    -   Randomly choose a picture in a designated folder and set it as wallpaper at a designated time stamp. For example, change the wall paper at **08:00 and 19:00**.
+    -   Randomly choose a picture from the Internet and set it as wallpaper at a designated time stamp. For example, change the wall paper at **08:00 and 19:00**. This feature requires an Internet connection.
 
 ##  Basic guide (old version)
 <!---
@@ -17,8 +24,9 @@
 The GUI and functionality may change in a later version of the program, however, the use should work in a relatively same way.
 <img src="dynamic-wallpaper/ImageForREADME/Guide.png" alt="dynamic-wallpaper/ImageForREADME/Guide.png">
 
-##  Demo (latest version)
-The images are taken from [Lorem Picsum](https://picsum.photos/).
+##  Demo (old version)
+-   The GUI and functionality may change in a later version of the program, however, the use should work in a relatively same way.
+-   The images are taken from [Lorem Picsum](https://picsum.photos/).
 <img src="dynamic-wallpaper/ImageForREADME/demo-1.png" alt="dynamic-wallpaper/ImageForREADME/demo-1.png">
 <img src="dynamic-wallpaper/ImageForREADME/demo-2.png" alt="dynamic-wallpaper/ImageForREADME/demo-2.png">
 
