@@ -34,9 +34,13 @@ The GUI and functionality may change in a later version of the program, however,
 -   This program has been tested only on Windows 10, it should run properly on this platform.
 
 ##  Execution process
--   Download the archive/zip file [here](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.1).
--   Extract the archive/zip file.
--   Go inside the extracted folder, run DynamicWallpaper.exe (done).
+-   For **zip file**:
+    -   Download the archive/zip file [here](https://github.com/hunghvu/dynamic-wallpaper/releases/tag/v1.0.1.2).
+    -   Extract the archive/zip file.
+    -   Go inside the extracted folder, run DynamicWallpaper.exe (done).
+-   For **jar file**:
+    -   Download DynamicWallpaper.jar file
+    -   If Java 11 or any later version is properly installed, the jar file can be executed directly using double click (done).
 
 ##  Component sources
 -   The project and executable files uses/packages [JNA](https://github.com/java-native-access/jna) open library. I don't own nor be a contributor to the library. All rights reserved to their respective owners/contributors/creators.
