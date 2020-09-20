@@ -19,22 +19,15 @@
 
 package view;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import model.TimeList;
 import view.subpanel.RightBottomButton;
 
@@ -89,12 +82,12 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * resize).
    */
   private static final JPanel MY_X_LOG_PANEL = new JPanel();
-  
+
   /**
    * Group of buttons at the bottom.
    */
   // Extracting class to reduce code length and complexity.
-  private static final JPanel MY_BUTTON_SUBPANEL = new RightBottomButton();
+  private static final JPanel BUTTON_SUBPANEL = new RightBottomButton();
 
   /**
    * LOG area label.
@@ -126,6 +119,7 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
     // Panel properties.
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    MY_X_LOG_PANEL.setLayout(new GridLayout(0, 1));
 
     // Component properties.
     MY_TEXT_LOG.setEditable(false);
@@ -143,10 +137,14 @@ public class RightTextPanel extends JPanel implements ActionListener {
     add(MY_X_LOG_PANEL);
     add(MY_TIME_LABEL);
     add(SCROLL_TIME_LIST);
-    add(MY_BUTTON_SUBPANEL);
+    add(BUTTON_SUBPANEL);
 
   }
-
+  
+  /**
+   * Get current text inside TIME LIST text area.
+   * @return the text in TIME LIST.
+   */
   public static String getTimeText() {
     return MY_TEXT_TIME_LIST.getText();
   }
@@ -161,15 +159,15 @@ public class RightTextPanel extends JPanel implements ActionListener {
    */
   public static void textSetter(final String theIndicator, final String theMsg) {
 
-    if (theIndicator.equals(MY_LOG_TEXT)) {
+    if (MY_LOG_TEXT.equals(theIndicator)) {
 
       MY_TEXT_LOG.append(theMsg + "\n \n");
 
-    } else if (theIndicator.equals("RESET_TIME")) {
+    } else if ("RESET_TIME".equals(theIndicator)) {
 
       MY_TEXT_TIME_LIST.setText("");
 
-    } else if (theIndicator.equals(MY_TIME_LIST_TEXT)) {
+    } else if (MY_TIME_LIST_TEXT.equals(theIndicator)) {
 
       MY_TEXT_LOG.append(theMsg + "\n \n");
       MY_TEXT_TIME_LIST.setText(String.join("\n \n", TimeList.getTimeList()));
@@ -199,11 +197,11 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
   }
 
-  // Done, as of 09/07/20:
+  // Done, as of 09/19/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
 
-  // Ignore LoD
+  // Ignore LoD.
 
 }

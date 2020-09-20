@@ -199,6 +199,14 @@ public class SouthDirPanel extends JPanel implements ActionListener {
         ) {
       
       RightTextPanel.textSetter(MY_LOG_OPTION, "Program is currently not running!");
+      
+      if (NorthCheckListPanel.isInternetChosen()) {
+        
+        // Let user un-grey the box even when the program is not running.
+        // 09/19/20.
+        NorthCheckListPanel.setCheckboxUsability(true);
+        
+      }
 
     } else {
       // When timer is set.
@@ -264,6 +272,9 @@ public class SouthDirPanel extends JPanel implements ActionListener {
 
       if (NorthCheckListPanel.isInternetChosen()) {
         
+        // Apply button should grey out the box in this case (09/19/20).
+        // Fix NPE due to stop button is trigger on the non-running process (folder).
+        NorthCheckListPanel.setCheckboxUsability(false);
         controller.Controller.startBackgroundNet();
         
       } else {

@@ -1,10 +1,15 @@
 # Internal development log
 
+## [1.0.1.2] - 09-19-2020
+-   Add import/export config functions.
+-   Change look and feel based on native OS.
+-   Fix all known bugs in **1.0.1.1**.
+
 ## [1.0.1.1] - 09-07-2020
 - Know bug(s):
-    - The program must be in running state before being stopped to un-grey-out the check box.
-    - The Apply button doesn't grey out the check box when the box option is chosen.
-        - Step to reproduce: Choose the box -> set time -> apply -> stop -> apply again. This can cause problems since it affects the functionality of Stop button, which results in threads not being stopped properly.
+    - ~~The program must be in running state before being stopped to un-grey-out the check box.~~ (fixed - 09/19/20).
+    - ~~The Apply button doesn't grey out the check box when the box option is chosen.~~ (fixed - 09/19/20).
+        - ~~Step to reproduce: Choose the box -> set time -> apply -> stop -> apply again. This can cause problems since it affects the functionality of Stop button, which results in threads not being stopped properly.~~
 
 
 ## [1.0.0.2] - 06-17-2020
@@ -20,10 +25,15 @@
 - The first (final) release.
 ___
 
+## 2020/09/19
+-   Finish implementing import/export function.
+-   Refactor RightTextPanel to reduce code length and complexity.
+-   Fix all known bugs in **1.0.1.1**.
+
 ## 2020/09/14
-- Change look and feel
-- Add import/export config buttons.
-- Plan:
+-   Change look and feel.
+-   Add import/export config buttons.
+-   Plan:
     -   Vi UI.
     -   Multi screen support.
 ___
@@ -32,7 +42,7 @@ ___
 - Fix the issue where threads may not be stopped properly due to the state (isSelected) of the check box.
 - Update comments, complete the update. Ready to be released.
 - Next plan:
-    - Implement save/import/export config function.
+    - ~~Implement save/import/export config function.~~ (09/19/2020 - Done).
     - Implement auto generate timestamp.
     - Different API call option.
     - Auto start with OS (optional).
