@@ -19,6 +19,7 @@
 
 package view;
 
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
@@ -28,15 +29,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.TimeList;
+import view.subpanel.RightBottomButton;
 
 /**
  * This class creates right/text panel, <br>
  * to display information (log and time list).
- * 
+ *
  * @author Hung Huu Vu
  *
  */
-@SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.CommentSize"  })
+@SuppressWarnings({ "serial", "PMD.LawOfDemeter", "PMD.CommentSize" })
 //Ignore comment size (GPL copyright notice).
 public class RightTextPanel extends JPanel implements ActionListener {
 
@@ -76,21 +78,16 @@ public class RightTextPanel extends JPanel implements ActionListener {
   private static final JButton MY_X_LOG_BUTTON = new JButton("Clear LOG");
 
   /**
-   * Button to clear TIME LIST.
-   */
-  private static final JButton MY_X_TIME_BUTTON = new JButton("Clear TIME LIST");
-
-  /**
    * Sub panel for clear log button. Aesthetic purpose (avoiding layout component
    * resize).
    */
   private static final JPanel MY_X_LOG_PANEL = new JPanel();
 
   /**
-   * Sub panel for clear time list button. Aesthetic purpose (avoiding layout
-   * component resize).
+   * Group of buttons at the bottom.
    */
-  private static final JPanel MY_X_TIME_PANEL = new JPanel();
+  // Extracting class to reduce code length and complexity.
+  private static final JPanel BUTTON_SUBPANEL = new RightBottomButton();
 
   /**
    * LOG area label.
@@ -116,20 +113,20 @@ public class RightTextPanel extends JPanel implements ActionListener {
    * Constructor.
    */
   public RightTextPanel() {
-    
+
     // Call super.
     super();
 
     // Panel properties.
     setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+    MY_X_LOG_PANEL.setLayout(new GridLayout(0, 1));
 
     // Component properties.
     MY_TEXT_LOG.setEditable(false);
     MY_TEXT_TIME_LIST.setEditable(false);
     MY_X_LOG_BUTTON.addActionListener(this);
-    MY_X_TIME_BUTTON.addActionListener(this);
     MY_X_LOG_PANEL.add(MY_X_LOG_BUTTON);
-    MY_X_TIME_PANEL.add(MY_X_TIME_BUTTON);
+
     // Center aligned labels.
     MY_LOG_LABEL.setAlignmentX(CENTER_ALIGNMENT);
     MY_TIME_LABEL.setAlignmentX(CENTER_ALIGNMENT);
@@ -140,24 +137,37 @@ public class RightTextPanel extends JPanel implements ActionListener {
     add(MY_X_LOG_PANEL);
     add(MY_TIME_LABEL);
     add(SCROLL_TIME_LIST);
-    add(MY_X_TIME_PANEL);
+    add(BUTTON_SUBPANEL);
 
+  }
+  
+  /**
+   * Get current text inside TIME LIST text area.
+   * @return the text in TIME LIST.
+   */
+  public static String getTimeText() {
+    return MY_TEXT_TIME_LIST.getText();
   }
 
   /**
    * Text setter for text (message) area.
-   * 
+   *
    * @param theIndicator Indicate which text area is going to be changed: <br>
    *                     LOG for MY_TEXT_LOG (LOG message)<br>
-   *                     TIME_LIST for MY_TEXT_TIME_LIST (TIME LIST message)
+   *                     TIME_LIST for MY_TEXT_TIME_LIST (TIME LIST message) <br>
+   *                     RESET_TIME to empty MY_TEXT_TIME_LIST
    */
   public static void textSetter(final String theIndicator, final String theMsg) {
 
-    if (theIndicator.equals(MY_LOG_TEXT)) {
+    if (MY_LOG_TEXT.equals(theIndicator)) {
 
       MY_TEXT_LOG.append(theMsg + "\n \n");
 
-    } else if (theIndicator.equals(MY_TIME_LIST_TEXT)) {
+    } else if ("RESET_TIME".equals(theIndicator)) {
+
+      MY_TEXT_TIME_LIST.setText("");
+
+    } else if (MY_TIME_LIST_TEXT.equals(theIndicator)) {
 
       MY_TEXT_LOG.append(theMsg + "\n \n");
       MY_TEXT_TIME_LIST.setText(String.join("\n \n", TimeList.getTimeList()));
@@ -183,32 +193,15 @@ public class RightTextPanel extends JPanel implements ActionListener {
 
       MY_TEXT_LOG.setText("");
 
-    } else if (theE.getSource() == MY_X_TIME_BUTTON) {
-      // Clear time list (display message + data storage) when
-      // button is pressed.
-
-      // Reset time list data. (02/09)
-      controller.Controller.resetTimeList();
-
-      // Change requirement checklist.
-      NorthCheckListPanel.requirementSetter(20);
-
-      // Display log.
-      MY_TEXT_LOG.append("Clear time list successfully! \n" + "If the program is still running, \n"
-          + "please add new time to the list, \n" + "or stop the program. \n \n");
-
-      // Reset time list display/message.
-      MY_TEXT_TIME_LIST.setText("");
-
     }
 
   }
 
-  // Done, as of 09/07/20:
+  // Done, as of 09/19/20:
   // Class: Done Recomment.
   // Class: Done Checkstyle.
   // Class: Done PMD.
-  
-  // Ignore LoD
+
+  // Ignore LoD.
 
 }

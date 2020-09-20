@@ -40,6 +40,8 @@ import java.nio.channels.FileLock;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * This class creates a window frame to contains panel. <br>
@@ -106,11 +108,23 @@ public class WindowFrame extends JFrame {
       setSize(SIZE, SIZE);
       setVisible(true);
       setResizable(false);
-      //Not directly call system exit (09/05).
+      // Not directly call system exit (09/05).
       setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
+      // Set look and feel (09/14)
+      try {
+        
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        
+      } catch (ClassNotFoundException 
+          | InstantiationException 
+          | IllegalAccessException
+          | UnsupportedLookAndFeelException e) {
+        
+        System.out.println("Exception in look and feel.");
+        
+      }   
+      
       // Add listener (02/09)
       this.addWindowListener(new WindowAdapter() {
 

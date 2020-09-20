@@ -77,6 +77,7 @@ public class Controller implements PropertyChangeListener {
    * The GUI frame.
    */
   // Ignore Checkstyle error (unused field).
+  @SuppressWarnings("unused")
   private static WindowFrame myFrame;
 
   /**
@@ -328,5 +329,7 @@ public class Controller implements PropertyChangeListener {
   // Ignore Unused private field.
   
   // Ignore Checkstyle warnings.
+  
+  // 09/19/20 Suppress "unused resource" checkstyle warnings.
   
 }
